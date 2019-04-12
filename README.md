@@ -6,6 +6,6 @@ Bandersnatch
 
 ##### By: James Burke, Nate Christy, Tobias Jacobson
 
-Text-based Horror Experience where you will use binary search trees to branch down with different story elements
+Text-based Horror Experience where you will use directed graphs to branch down with different story elements
 where you can explore a world, make choices, and try to survive
 
