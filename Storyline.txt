@@ -1,0 +1,20 @@
+The storyline for our Bandersnatch game which will be parsed in the BANDERSNATCH.cpp main function
+
+
+to parse data use integers and mod operator??
+    - https://www.reddit.com/r/Bandersnatch/comments/aatkkp/how_to_go_to_any_scene_in_the_movie/
+    - using alphabet and integers (A1 - A2 - A3 ... B1 - B2 etc.)
+A1
+A2
+A3
+A4
+
+B1
+B2
+B3
+B4
+
+C1
+C2
+C3
+C4
