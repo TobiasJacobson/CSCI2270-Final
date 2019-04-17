@@ -22,6 +22,16 @@ struct vertex
     string chapter; // Chapter or string for entire storyPart string??
     bool visited;
     vector<Edge> Edges; //stores edges to adjacent vertices
+
+
+
+};
+
+struct character
+{
+    
+    bool injuries; // These will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    bool roomOneKey; // A key that can be found in the first room. It opens ______
 };
 
 class Graph
