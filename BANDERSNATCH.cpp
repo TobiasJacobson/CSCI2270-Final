@@ -92,20 +92,20 @@ void credits()
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    Graph g;
-    // Vector of currNode to store out.txt
+    Game g;
     string menuInput;
     introDisplay();
 
+    string storyTxt = argv[1];
     while(menuInput != "5")
     {
         getline(cin, menuInput);
         if(menuInput == "1")
         {
             newGame();
-            g.loadGame("hello.txt");
+            g.loadGame(storyTxt);
         }
         if(menuInput == "2")
         {

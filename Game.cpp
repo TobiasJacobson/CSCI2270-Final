@@ -19,23 +19,23 @@ using namespace std;
 //  cyclical
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Graph::Graph()
-{
-    // No dynamic memory - so not needed
-}
-Graph::~Graph()
-{
-    // No dynamic memory - so not needed
-}
-void Graph::addVertex(string identifier, string storyPart)
+// Graph::Graph()
+// {
+//     // No dynamic memory - so not needed
+// }
+// Graph::~Graph()
+// {
+//     // No dynamic memory - so not needed
+// }
+void Game::addVertex(string identifier, string storyPart)
 {
     vertex newVertex;
     newVertex.visited = false;
-    newVertex.identifier = identifier
-    newVertex.chapter = storyPart
+    newVertex.identifier = identifier;
+    newVertex.chapter = storyPart;
     vertices.push_back(newVertex);
 }
-void Graph::addEdge(string storyPart1, string storyPart2)
+void Game::addEdge(string storyPart1, string storyPart2)
 {
     for(int i = 0; i < vertices.size(); i++)
     {
@@ -53,7 +53,7 @@ void Graph::addEdge(string storyPart1, string storyPart2)
          }
      }
 }
-void Graph::displayEdges()
+void Game::displayEdges()
 {
     for(int i = 0; i < vertices.size(); i++)
     {
@@ -69,7 +69,7 @@ void Graph::displayEdges()
         cout << endl;
     }
 }
-void Graph::printDFT();
+void Game::printDFT()
 {
     setAllVerticesUnvisited();
     for(int i = 0; i < vertices.size(); i++)
@@ -77,7 +77,7 @@ void Graph::printDFT();
         DFT_traversal(&vertices[i]);
     }
 }
-void Graph::printBFT()
+void Game::printBFT()
 {
     setAllVerticesUnvisited();
     for(int i = 0; i < vertices.size(); i++)
@@ -89,7 +89,7 @@ void Graph::printBFT()
         }
     }
 }
-void Graph::setAllVerticesUnvisited()
+void Game::setAllVerticesUnvisited()
 {
     for(int i = 0; i < vertices.size(); i++)
     {
@@ -108,14 +108,14 @@ vertex DFS(vertex *v, string identifier){
         }
     }
 }
-vertex* Graph::findVertex(string identifier){
+vertex* Game::findVertex(string identifier){
 
     for(int i = 0; i < vertices.size(); i++)
     {
         vertex myV = DFS(&vertices[i], identifier);
     }
 }
-void Graph::BFT_traversal(vertex *v)
+void Game::BFT_traversal(vertex *v)
 {
     list<vertex*> queue;
     queue.push_back(v);
@@ -123,7 +123,7 @@ void Graph::BFT_traversal(vertex *v)
     while(!queue.empty())
     {
         vertex *s = queue.front();
-        cout << s->name << endl;
+        cout << s->identifier << endl;
         queue.pop_front();
         for(int i=0; i< s->Edges.size(); i++)
         {
@@ -135,9 +135,9 @@ void Graph::BFT_traversal(vertex *v)
         }
     }
 }
-void Graph::DFT_traversal(vertex *v)
+void Game::DFT_traversal(vertex *v)
 {
-    if(!v->visited) cout << v->name << endl;
+    if(!v->visited) cout << v->identifier << endl;
     v->visited = true;
     for(int i = 0; i < v->Edges.size(); i++)
     {
@@ -148,27 +148,27 @@ void Graph::DFT_traversal(vertex *v)
     }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Graph::saveProgress()
+void Game::saveProgress()
 {
     // Need some way to store the current vertex and keep track of where the user is.
 }
-void Graph::loadGame(string txtFile) // If time allows
+void Game::loadGame(string txtFile)
 {
-    string arr = ["0", "1", "2", "3", "1A","1A_1", "1A_2", "1A_11", "1A_11_1", "1A_11_2", "1B", "1C", "1C_1", "1C_11", "1C_11_1", "1C_11_2", "1C_2", "1C_21", "1C_21_1", "1C_21_2", "1C_3", "2A", "2B", "2C", "2D", "3A", "3B", "3B_1", "3B_11", "3B_12", "3B_12_1", "3B_12_2", "3B_12_21", "3B_12_22", "3B_2" ];
+    string arr[] = {"0", "1", "2", "3", "1A","1A_1", "1A_2", "1A_11", "1A_11_1", "1A_11_2", "1B", "1C", "1C_1", "1C_11", "1C_11_1", "1C_11_2", "1C_2", "1C_21", "1C_21_1", "1C_21_2", "1C_3", "2A", "2B", "2C", "2D", "3A", "3B", "3B_1", "3B_11", "3B_12", "3B_12_1", "3B_12_2", "3B_12_21", "3B_12_22", "3B_2" };
     ifstream inFile;
     inFile.open(txtFile);
     if(!inFile)
     {
        cout << "Could not open storyfile" << endl;
-       return -1;
+       return;
     }
     string identifier;
     string line;
     int i = 0;
     while(getline(inFile,line)) // reads storyline.txt line by line
     {
-        getline(line)
-        identifier = arr[i]
+        //getline(inFile,line)
+        identifier = arr[i];
         addVertex(identifier, line );
         i++;
     }
@@ -181,13 +181,13 @@ void Graph::loadGame(string txtFile) // If time allows
     player.potion = false;
 }
 
-void Graph::saveNode()
+void Game::saveNode()
 {
     // To save and distrubt the current location
     // This way we can also add it to the unique output for the user in the txt file
 }
 
-void makeChoice() // Function to make choices
+void Game::makeChoice() // Function to make choices
 {
     // Left or right based on their choice
 }

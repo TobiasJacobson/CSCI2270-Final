@@ -5,13 +5,14 @@
 #include <list>
 #include <queue>
 
-
+using namespace std;
 
 // cpp file intended to be for the bulk of the game as to remove it from the clutter of the intital stages
 
 //  Directed graph, allows user to back track after dying
 //  txt of final unique path
 //  cyclical
+struct vertex;
 
 struct Edge
 {
@@ -20,7 +21,7 @@ struct Edge
 
 struct vertex
 {
-    character *player;
+    //character *player;
     string identifier; // Identifier of the node
     string chapter; // Chapter or string for storyPart
     bool visited;
@@ -35,12 +36,12 @@ struct character
     bool potion; // Bool to represent if potion is found
 };
 
-class Graph
+class Game
 {
   public:
-    Graph();
-    ~Graph();
-    void addVertex(string storyPart);
+    // Graph();
+    // ~Graph();
+    void addVertex(string identifier, string storyPart);
     void addEdge(string storyPart1, string storyPart2);
     void displayEdges();
     void printDFT();
@@ -48,7 +49,7 @@ class Graph
     void setAllVerticesUnvisited();
 
     void saveProgress();
-    void loadSavedGame(); // If time allows
+    void loadGame(string txtFile);
     void saveNode();
     void makeChoice(); // Function to make choices
 
