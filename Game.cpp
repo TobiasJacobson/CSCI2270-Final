@@ -18,37 +18,141 @@ using namespace std;
 //  txt of final unique path
 //  cyclical
 
-// STRUCTS ---------------------------------------------------------------------
-// struct Edge
-// {
-//     vertex *v;
-// };
-//
-// struct vertex
-// {
-//     string chapter; // Chapter or string for entire storyPart string??
-//     bool visited;
-//     vector<Edge> Edges; //stores edges to adjacent vertices
-// };
-
-// PRIVATE VARIABLES -----------------------------------------------------------
-// vector<vertex> story; //stores vertices
-//vertex *currNode;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Graph::Graph();
-Graph::~Graph();
-void Graph::addVertex(string storyPart);
-void Graph::addEdge(string storyPart1, string storyPart2);
-void Graph::displayEdges();
+Graph::Graph()
+{
+    // No dynamic memory - so not needed
+}
+Graph::~Graph()
+{
+    // No dynamic memory - so not needed
+}
+void Graph::addVertex(string identifier, string storyPart)
+{
+    vertex newVertex;
+    newVertex.visited = false;
+    newVertex.identifier = identifier
+    newVertex.chapter = storyPart
+    vertices.push_back(newVertex);
+}
+void Graph::addEdge(string storyPart1, string storyPart2)
+{
+    for(int i = 0; i < vertices.size(); i++)
+    {
+         if(vertices[i].identifier == storyPart1)
+         {
+             for(int j = 0; j < vertices.size(); j++)
+             {
+                 if(vertices[j].identifier == storyPart2 && i != j) // i != j bc then we'd pus_back not within the limits of the graph size
+                 {
+                    Edge aV;
+                    aV.v = &vertices[j];
+                    vertices[i].Edges.push_back(aV);
+                 }
+             }
+         }
+     }
+}
+void Graph::displayEdges()
+{
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        cout << vertices[i].identifier << "-->";
+        for(int j = 0; j < vertices[i].Edges.size(); j++)
+        {
+            cout << vertices[i].Edges[j].v -> identifier;
+            if(j != vertices[i].Edges.size() - 1)
+            {
+                cout << "***";
+            }
+        }
+        cout << endl;
+    }
+}
 void Graph::printDFT();
-void Graph::printBFT();
-void Graph::setAllVerticesUnvisited();
+{
+    setAllVerticesUnvisited();
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        DFT_traversal(&vertices[i]);
+    }
+}
+void Graph::printBFT()
+{
+    setAllVerticesUnvisited();
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        if(vertices[i].visited == false)
+        {
+            vertices[i].visited = true;
+            BFT_traversal(&vertices[i]);
+        }
+    }
+}
+void Graph::setAllVerticesUnvisited()
+{
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        vertices[i].visited = false;
+    }
+}
+vertex DFS(vertex *v, string identifier){
+    if(!(v->identifier == identifier)) return *v;
+    v->visited = true;
 
+    for(int i = 0; i < v->Edges.size(); i++)
+    {
+        if(!(v->Edges[i].v->visited == true))
+        {
+            DFS(v->Edges[i].v, identifier);
+        }
+    }
+}
+vertex* Graph::findVertex(string identifier){
+
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        vertex myV = DFS(&vertices[i], identifier);
+    }
+}
+void Graph::BFT_traversal(vertex *v)
+{
+    list<vertex*> queue;
+    queue.push_back(v);
+    v->visited = true;
+    while(!queue.empty())
+    {
+        vertex *s = queue.front();
+        cout << s->name << endl;
+        queue.pop_front();
+        for(int i=0; i< s->Edges.size(); i++)
+        {
+            if(s->Edges[i].v->visited == false)
+            {
+                s->Edges[i].v->visited = true;
+                queue.push_back(s->Edges[i].v);
+            }
+        }
+    }
+}
+void Graph::DFT_traversal(vertex *v)
+{
+    if(!v->visited) cout << v->name << endl;
+    v->visited = true;
+    for(int i = 0; i < v->Edges.size(); i++)
+    {
+        if(!(v->Edges[i].v->visited == true))
+        {
+            DFT_traversal(v->Edges[i].v);
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Graph::saveProgress()
 {
     // Need some way to store the current vertex and keep track of where the user is.
 }
-void Graph::loadSavedGame()
+void Graph::loadSavedGame() // If time allows
 {
     // Revert back to make previous load because they died or the simpl want to go back
 }
@@ -63,8 +167,3 @@ void makeChoice() // Function to make choices
 {
     // Left or right based on their choice
 }
-
-
-vertex *Graph::findVertex(std::string name);
-void Graph::BFT_traversal(vertex *v);
-void Graph::DFT_traversal(vertex *v);
