@@ -105,21 +105,30 @@ int main(int argc, char* argv[])
         if(menuInput == "1")
         {
             newGame();
-            g.loadGame(storyTxt);
+            if(g.loadGame(storyTxt))
+            {
+                cout << "Default Game Loaded" << endl;
+            }
+            else
+            {
+                cout << "Failed to laod default game" << endl;
+            }
+            g.printDFT(); // Check to make sure graph is initialized
+            // Need to implement makeChoice
         }
-        if(menuInput == "2")
+        else if(menuInput == "2")
         {
-            //loadPreviousGame();
+            //loadPreviousGame(); // Implement if time allows
         }
-        if(menuInput == "3")
+        else if(menuInput == "3")
         {
             options();
         }
-        if(menuInput == "4")
+        else if(menuInput == "4")
         {
             credits();
         }
-        if(menuInput == "5")
+        else if(menuInput == "5")
         {
             cout << endl;
             cout << "See you in another life mate" << endl;
@@ -131,6 +140,10 @@ int main(int argc, char* argv[])
             cout << "╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝██████╔╝   ██║   ███████╗" << endl;
             cout << " ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ╚══════╝" << endl;
             break;
+        }
+        else
+        {
+            cout << "INVALID INPUT" << endl;
         }
     }
 

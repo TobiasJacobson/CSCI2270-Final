@@ -30,7 +30,7 @@ struct vertex
 
 struct character
 {
-    int sanity; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    int fear; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
     bool roomGarageKey; // A key that can be found in the first room
     bool girlFound; // Bool to represent if the girl is found
     bool potion; // Bool to represent if potion is found
@@ -49,7 +49,7 @@ class Game
     void setAllVerticesUnvisited();
 
     void saveProgress();
-    void loadGame(string txtFile);
+    bool loadGame(string txtFile);
     void saveNode();
     void makeChoice(); // Function to make choices
 
