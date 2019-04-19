@@ -152,9 +152,33 @@ void Graph::saveProgress()
 {
     // Need some way to store the current vertex and keep track of where the user is.
 }
-void Graph::loadSavedGame() // If time allows
+void Graph::loadGame(string txtFile) // If time allows
 {
-    // Revert back to make previous load because they died or the simpl want to go back
+    string arr = ["0", "1", "2", "3", "1A","1A_1", "1A_2", "1A_11", "1A_11_1", "1A_11_2", "1B", "1C", "1C_1", "1C_11", "1C_11_1", "1C_11_2", "1C_2", "1C_21", "1C_21_1", "1C_21_2", "1C_3", "2A", "2B", "2C", "2D", "3A", "3B", "3B_1", "3B_11", "3B_12", "3B_12_1", "3B_12_2", "3B_12_21", "3B_12_22", "3B_2" ];
+    ifstream inFile;
+    inFile.open(txtFile);
+    if(!inFile)
+    {
+       cout << "Could not open storyfile" << endl;
+       return -1;
+    }
+    string identifier;
+    string line;
+    int i = 0;
+    while(getline(inFile,line)) // reads storyline.txt line by line
+    {
+        getline(line)
+        identifier = arr[i]
+        addVertex(identifier, line );
+        i++;
+    }
+
+
+    character player;
+    player.sanity = 0;
+    player.roomGarageKey = false;
+    player.girlFound = false;
+    player.potion = false;
 }
 
 void Graph::saveNode()
