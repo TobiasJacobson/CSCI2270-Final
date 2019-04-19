@@ -6,6 +6,8 @@
 #include <vector>
 #include <sstream>
 
+#include "Game.hpp"
+
 using namespace std;
 
 // (1) New Game from top of BST
@@ -14,7 +16,9 @@ using namespace std;
 // (4) Credits for us and anything we want to say
 // (5) Quit Game and unsave
 
-
+// Name Ideas:
+// Everdoom
+//
 
 void introDisplay()
 {
@@ -55,15 +59,15 @@ void newGame()
     // call game function here!
 }
 
-void loadPreviousGame()
-{
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-    cout << endl;
-    // call implementation of saved nodes
-    cout << endl;
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-
-}
+// void loadPreviousGame() // If time allows
+// {
+//     cout << "------------------------------------------------------------------------------------------------------------" << endl;
+//     cout << endl;
+//     // call implementation of saved nodes
+//     cout << endl;
+//     cout << "------------------------------------------------------------------------------------------------------------" << endl;
+//
+// }
 
 void options()
 {
@@ -82,7 +86,7 @@ void credits()
     cout << "Credits -- " << endl;
     cout << "Programmers: Nate Christy, Tobias Jacobson, James Burke" << endl;
     cout << "This was a lot of fun to make and we hope those who play it don't despise it" << endl;
-    cout << "Granted some parts were difficult to figure out..." << endl;
+    cout << "Granted some parts were difficult to figure out...." << endl;
     cout << "Anyways, happy trails my friend. See you in another life" << endl;
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -90,14 +94,26 @@ void credits()
 
 int main()
 {
+    Graph g;
+    // Vector of currNode to store out.txt
     string menuInput;
     introDisplay();
+
     while(menuInput != "5")
     {
         getline(cin, menuInput);
         if(menuInput == "1")
         {
             newGame();
+            g.loadGame("hello.txt");
+        }
+        if(menuInput == "2")
+        {
+            //loadPreviousGame();
+        }
+        if(menuInput == "3")
+        {
+            options();
         }
         if(menuInput == "4")
         {
