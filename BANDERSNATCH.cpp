@@ -6,6 +6,8 @@
 #include <vector>
 #include <sstream>
 
+#include "Game.hpp"
+
 using namespace std;
 
 // (1) New Game from top of BST
@@ -14,7 +16,9 @@ using namespace std;
 // (4) Credits for us and anything we want to say
 // (5) Quit Game and unsave
 
-
+// Name Ideas:
+// Everdoom
+//
 
 void introDisplay()
 {
@@ -26,19 +30,19 @@ void introDisplay()
     cout << "|   ██╔══██╗██╔══██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗╚════██║██║╚██╗██║██╔══██║   ██║   ██║     ██╔══██║   |" << endl;
     cout << "|   ██████╔╝██║  ██║██║ ╚████║██████╔╝███████╗██║  ██║███████║██║ ╚████║██║  ██║   ██║   ╚██████╗██║  ██║   |" << endl;
     cout << "|   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝   |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|      (1) New Game                                                                                         |" << endl;
-    cout << "|      (2) Load Previous Game                                                                               |" << endl;
-    cout << "|      (3) Options                                                                                          |" << endl;
-    cout << "|      (4) Credits                                                                                          |" << endl;
-    cout << "|      (5) Quit Game                                                                                        |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|                                                                                                           |" << endl;
-    cout << "|                                                                                                           |" << endl;
+    cout << "|                                  ___________                    _______________                           |" << endl;
+    cout << "|                                 |  __   __  |                  |\ ___________ /|                          |" << endl;
+    cout << "|                                 | |  | |  | |                  | |  _ _ _ _  | |                          |" << endl;
+    cout << "|                                 | |  | |  | |                  | | | | | | | | |                          |" << endl;
+    cout << "|                                 | |  | |  | |                  | | |-+-+-+-| | |                          |" << endl;
+    cout << "|      (1) New Game               | |__| |__| |                  | | |_|_|_|_| | |                          |" << endl;
+    cout << "|      (2) Load Previous Game     |  __   __()|                  | |    ___    | |                          |" << endl;
+    cout << "|      (3) Options                | |  | |  | |                  | |   [___] ()| |                          |" << endl;
+    cout << "|      (4) Credits                | |  | |  | |                  | |         ||| |                          |" << endl;
+    cout << "|      (5) Quit Game              | |  | |  | |                  | |         ()| |                          |" << endl;
+    cout << "|                                 | |  | |  | |                  | |           | |                          |" << endl;
+    cout << "|                                 | |__| |__| |                  | |           | |                          |" << endl;
+    cout << "|                                 |___________|                  |_|___________|_|                          |" << endl;
     cout << " ----------------------------------------------------------------------------------------------------------- " << endl;
 }
 
@@ -55,15 +59,15 @@ void newGame()
     // call game function here!
 }
 
-void loadPreviousGame()
-{
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-    cout << endl;
-    // call implementation of saved nodes
-    cout << endl;
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-
-}
+// void loadPreviousGame() // If time allows
+// {
+//     cout << "------------------------------------------------------------------------------------------------------------" << endl;
+//     cout << endl;
+//     // call implementation of saved nodes
+//     cout << endl;
+//     cout << "------------------------------------------------------------------------------------------------------------" << endl;
+//
+// }
 
 void options()
 {
@@ -82,28 +86,49 @@ void credits()
     cout << "Credits -- " << endl;
     cout << "Programmers: Nate Christy, Tobias Jacobson, James Burke" << endl;
     cout << "This was a lot of fun to make and we hope those who play it don't despise it" << endl;
-    cout << "Granted some parts were difficult to figure out..." << endl;
+    cout << "Granted some parts were difficult to figure out...." << endl;
     cout << "Anyways, happy trails my friend. See you in another life" << endl;
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    Game g;
     string menuInput;
     introDisplay();
+
+    string storyTxt = argv[1];
     while(menuInput != "5")
     {
         getline(cin, menuInput);
         if(menuInput == "1")
         {
             newGame();
+            if(g.loadGame(storyTxt))
+            {
+                cout << "Default Game Loaded" << endl;
+            }
+            else
+            {
+                cout << "Failed to laod default game" << endl;
+            }
+            g.printDFT(); // Check to make sure graph is initialized
+            // Need to implement makeChoice
         }
-        if(menuInput == "4")
+        else if(menuInput == "2")
+        {
+            //loadPreviousGame(); // Implement if time allows
+        }
+        else if(menuInput == "3")
+        {
+            options();
+        }
+        else if(menuInput == "4")
         {
             credits();
         }
-        if(menuInput == "5")
+        else if(menuInput == "5")
         {
             cout << endl;
             cout << "See you in another life mate" << endl;
@@ -115,6 +140,10 @@ int main()
             cout << "╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝██████╔╝   ██║   ███████╗" << endl;
             cout << " ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ╚══════╝" << endl;
             break;
+        }
+        else
+        {
+            cout << "INVALID INPUT" << endl;
         }
     }
 
