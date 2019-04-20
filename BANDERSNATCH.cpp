@@ -74,16 +74,6 @@ void inGameMenu() // In game menu to if 9 is pressed
     cout << "(3) Quit to main menu" << endl;
 }
 
-void loadPreviousGame() // If time allows
-{
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-    cout << endl;
-    cout << "Will implement if time allows" << endl;
-    // call implementation of saved nodes
-    cout << endl;
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-
-}
 
 void options() // Not sure what this will do but menu's always have options
 {
@@ -117,6 +107,7 @@ int main(int argc, char* argv[]) // Main for entire game
     string gameInput;
     string game_Menu_Input;
     int userInput;
+    string saveProgress;
     string storyTxt = argv[1];
     // Game intro displayed
     introDisplay();
@@ -159,7 +150,9 @@ int main(int argc, char* argv[]) // Main for entire game
                         }
                         else if(game_Menu_Input == "2")
                         {
-                            g.saveNode(); // Will save the current node and allow load new game
+                            cout << "Enter username to save as: " << endl;
+                            getline(cin, saveProgress);
+                            g.saveNode(saveProgress, g.userPos); // Will save the current node and allow load new game
                         }
                         else if(game_Menu_Input == "3")
                         {
@@ -192,7 +185,7 @@ int main(int argc, char* argv[]) // Main for entire game
         }
         else if(menuInput == "2") // Will load previous save
         {
-            loadPreviousGame(); // Implement if time allows
+            g.loadPreviousGame(); // Implement if time allows
         }
         else if(menuInput == "3") // Will open options
         {

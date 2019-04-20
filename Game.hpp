@@ -32,6 +32,12 @@ struct character
     bool potion; // Bool to represent if potion is found
 };
 
+struct savedNode
+{
+    string saveName;
+    vertex *savePos;
+};
+
 class Game
 {
   public:
@@ -45,14 +51,17 @@ class Game
 
     void saveProgress();
     bool loadGame(string txtFile);
-    void saveNode();
+    void saveNode(string n, vertex *v);
+    void loadPreviousGame();
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
 
-    vertex *userPos; // Public variable to access the current user position 
+    vertex *userPos; // Public variable to access the current user position
+    vertex *savedProgress; // Public variable to allow loading of a new game
   private:
     vector<vertex> vertices; //stores vertices
+    vector<savedNode> saves; // Stores saves 
     vertex *currNode;
     vertex *findVertex(std::string name);
     void DFT_traversal(vertex *v);

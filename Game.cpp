@@ -266,10 +266,14 @@ bool Game::loadGame(string txtFile)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Game::saveNode() // Will save current user postion and allow for a loadPreviousGame() function call
+void Game::saveNode(string name, vertex *userPosition) // Will save current user postion and allow for a loadPreviousGame() function call
 {
     // To save and distrubt the current location
     // This way we can also add it to the unique output for the user in the txt file
+    savedNode newSave;
+    newSave.saveName = name;
+    newSave.savePos = userPosition;
+    saves.push_back(newSave);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -290,7 +294,7 @@ void Game::showChapter(vertex *curr) // Displays the chapter/story part/story se
 
 vertex *Game::makeChoice(int choice, vertex *v) // Function allowing user to make a choice based in the chapter of the most recent node
 {
-    // First a simple call to make sure the choice is within the vertex nodes bounderies 
+    // First a simple call to make sure the choice is within the vertex nodes bounderies
     int maxSize = v->Edges.size();
     if(0 <= choice && choice <= maxSize)
     {
@@ -305,3 +309,18 @@ vertex *Game::makeChoice(int choice, vertex *v) // Function allowing user to mak
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Game::loadPreviousGame() // If time allows
+{
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+    cout << endl;
+    for(int i = 0; i < saves.size(); i++)
+    {
+        cout << "Name: " << saves[i].saveName << endl;
+        cout << "Progress: " << saves[i].savePos->identifier << endl;
+        cout << " ############ " << endl;
+    }
+    cout << endl;
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
+}
