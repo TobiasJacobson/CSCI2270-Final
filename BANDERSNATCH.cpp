@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) // Main for entire game
                         {
                             cout << "Enter username to save as: " << endl;
                             getline(cin, saveProgress);
-                            g.saveNode(saveProgress, g.userPos); // Will save the current node and allow load new game
+                            g.saveNode(saveProgress, g.userPos, g.player); // Will save the current node and allow load new game
                         }
                         else if(game_Menu_Input == "3")
                         {

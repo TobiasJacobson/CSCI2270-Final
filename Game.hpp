@@ -36,6 +36,7 @@ struct savedNode
 {
     string saveName;
     vertex *savePos;
+    character *saveCharacter;
 };
 
 class Game
@@ -51,17 +52,19 @@ class Game
 
     void saveProgress();
     bool loadGame(string txtFile);
-    void saveNode(string n, vertex *v);
+    void saveNode(string n, vertex *v, character *c);
     void loadPreviousGame();
+    void generatePreviousGame(string txtFile);
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
+    character *player;
   private:
     vector<vertex> vertices; //stores vertices
-    vector<savedNode> saves; // Stores saves 
+    vector<savedNode> saves; // Stores saves
     vertex *currNode;
     vertex *findVertex(std::string name);
     void DFT_traversal(vertex *v);

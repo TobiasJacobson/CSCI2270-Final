@@ -256,23 +256,24 @@ bool Game::loadGame(string txtFile)
     addEdge("3B_2", "3");
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Creating new player struct obj. for this gameplay
-    character player;
-    player.fear = 0;
-    player.roomGarageKey = false;
-    player.girlFound = false;
-    player.potion = false;
+    //character player;
+    player->fear = 0;
+    player->roomGarageKey = false;
+    player->girlFound = false;
+    player->potion = false;
     return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Game::saveNode(string name, vertex *userPosition) // Will save current user postion and allow for a loadPreviousGame() function call
+void Game::saveNode(string name, vertex *userPosition, character *c) // Will save current user postion and allow for a loadPreviousGame() function call
 {
     // To save and distrubt the current location
     // This way we can also add it to the unique output for the user in the txt file
     savedNode newSave;
     newSave.saveName = name;
     newSave.savePos = userPosition;
+    newSave.saveCharacter = c;
     saves.push_back(newSave);
 }
 
@@ -322,5 +323,10 @@ void Game::loadPreviousGame() // If time allows
     }
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
+}
+
+void Game::generatePreviousGame(string txtFile)
+{
 
 }
