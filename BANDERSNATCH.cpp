@@ -10,28 +10,24 @@
 
 using namespace std;
 
-// (1) New Game from top of BST
-// (2) Load Previous Game from previsouly saved tree nodes
-// (3) Options such as color? sounds?
-// (4) Credits for us and anything we want to say
-// (5) Quit Game and unsave
+// TODO:
+// Store player position using currNode to txt file
+// Save Function
+// Load function (based on name??)
 
-// Name Ideas:
-// Everdoom
-//
 
-void introDisplay()
+void introDisplay() // Main menu for start of game
 {
     cout << " ----------------------------------------------------------------------------------------------------------- " << endl;
     cout << "|                                                                                                           |" << endl;
-    cout << "|   ██████╗  █████╗ ███╗   ██╗██████╗ ███████╗██████╗ ███████╗███╗   ██╗ █████╗ ████████╗ ██████╗██╗  ██╗   |" << endl;
-    cout << "|   ██╔══██╗██╔══██╗████╗  ██║██╔══██╗██╔════╝██╔══██╗██╔════╝████╗  ██║██╔══██╗╚══██╔══╝██╔════╝██║  ██║   |" << endl;
-    cout << "|   ██████╔╝███████║██╔██╗ ██║██║  ██║█████╗  ██████╔╝███████╗██╔██╗ ██║███████║   ██║   ██║     ███████║   |" << endl;
-    cout << "|   ██╔══██╗██╔══██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗╚════██║██║╚██╗██║██╔══██║   ██║   ██║     ██╔══██║   |" << endl;
-    cout << "|   ██████╔╝██║  ██║██║ ╚████║██████╔╝███████╗██║  ██║███████║██║ ╚████║██║  ██║   ██║   ╚██████╗██║  ██║   |" << endl;
-    cout << "|   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝   |" << endl;
+    cout << "|                ██████╗  ██████╗ ███╗   ██╗████████╗    ███████╗████████╗ ██████╗ ██████╗                  |" << endl;
+    cout << "|                ██╔══██╗██╔═══██╗████╗  ██║╚══██╔══╝    ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗                 |" << endl;
+    cout << "|                ██║  ██║██║   ██║██╔██╗ ██║   ██║       ███████╗   ██║   ██║   ██║██████╔╝                 |" << endl;
+    cout << "|                ██║  ██║██║   ██║██║╚██╗██║   ██║       ╚════██║   ██║   ██║   ██║██╔═══╝                  |" << endl;
+    cout << "|                ██████╔╝╚██████╔╝██║ ╚████║   ██║       ███████║   ██║   ╚██████╔╝██║                      |" << endl;
+    cout << "|                ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝   ╚═╝       ╚══════╝   ╚═╝    ╚═════╝ ╚═╝                      |" << endl;
     cout << "|                                  ___________                    _______________                           |" << endl;
-    cout << "|                                 |  __   __  |                  |\ ___________ /|                          |" << endl;
+    cout << "|                                 |  __   __  |                  |- ___________ -|                          |" << endl;
     cout << "|                                 | |  | |  | |                  | |  _ _ _ _  | |                          |" << endl;
     cout << "|                                 | |  | |  | |                  | | | | | | | | |                          |" << endl;
     cout << "|                                 | |  | |  | |                  | | |-+-+-+-| | |                          |" << endl;
@@ -46,40 +42,60 @@ void introDisplay()
     cout << " ----------------------------------------------------------------------------------------------------------- " << endl;
 }
 
-void newGame()
+void endGameDisplay() // End of game display
+{
+    cout << endl;
+    cout << "See you in another life mate" << endl;
+    cout << endl;
+    cout << " ██████╗  ██████╗  ██████╗ ██████╗ ██████╗ ██╗   ██╗███████╗" << endl;
+    cout << "██╔════╝ ██╔═══██╗██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝" << endl;
+    cout << "██║  ███╗██║   ██║██║   ██║██║  ██║██████╔╝ ╚████╔╝ █████╗" << endl;
+    cout << "██║   ██║██║   ██║██║   ██║██║  ██║██╔══██╗  ╚██╔╝  ██╔══╝" << endl;
+    cout << "╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝██████╔╝   ██║   ███████╗" << endl;
+    cout << " ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ╚══════╝" << endl;
+}
+void newGame() // Intro to a new game
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << endl;
-    cout << "Welcome to Bandersnatch -- The rules are quite simple really" << endl;
+    cout << "Welcome to -- Don't Stop -- " << endl;
+    cout << "The rules are quite simple really" << endl;
     cout << "Follow the storyline and when given a choice, choose the option you'd like to explore" << endl;
     cout << "Each choice leads you down a different road -- each with a different end" << endl;
     cout << "-Play several times to get various endings-" << endl;
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
-    // call game function here!
 }
 
-// void loadPreviousGame() // If time allows
-// {
-//     cout << "------------------------------------------------------------------------------------------------------------" << endl;
-//     cout << endl;
-//     // call implementation of saved nodes
-//     cout << endl;
-//     cout << "------------------------------------------------------------------------------------------------------------" << endl;
-//
-// }
+void inGameMenu() // In game menu to if 9 is pressed
+{
+    cout << "(1) Back to game" << endl;
+    cout << "(2) Save Game" << endl;
+    cout << "(3) Quit to main menu" << endl;
+}
 
-void options()
+void loadPreviousGame() // If time allows
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << endl;
-
+    cout << "Will implement if time allows" << endl;
+    // call implementation of saved nodes
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 
 }
 
-void credits()
+void options() // Not sure what this will do but menu's always have options
+{
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+    cout << endl;
+    cout << "Will implement if time allows" << endl;
+    cout << endl;
+    cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
+}
+
+void credits() // Credits to developers (Us)
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << endl;
@@ -92,58 +108,108 @@ void credits()
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) // Main for entire game
 {
+    // Struct declaration
     Game g;
+    // Variable Declarations
     string menuInput;
-    introDisplay();
-
+    string gameInput;
+    string game_Menu_Input;
+    int userInput;
     string storyTxt = argv[1];
-    while(menuInput != "5")
+    // Game intro displayed
+    introDisplay();
+    while(menuInput != "5") // While for main menu
     {
+
+        if(game_Menu_Input == "3")
+        {
+            // Game intro displayed && variables reset
+            menuInput = "";
+            gameInput = "";
+            game_Menu_Input = "";
+            userInput = -1;
+            introDisplay();
+            // getline(cin, menuInput);
+        }
+        // User input taken
         getline(cin, menuInput);
-        if(menuInput == "1")
+        if(menuInput == "1") // Option 1 to start a new game
         {
-            newGame();
-            if(g.loadGame(storyTxt))
+
+            if(g.loadGame(storyTxt)) // New game loaded succesfully
             {
-                cout << "Default Game Loaded" << endl;
+                cout << "Game Loaded..." << endl;
+                cout << endl;
+                newGame();
+                g.userPos = g.startGame();
+                while(game_Menu_Input != "3") // While for in game inputs
+                {
+                    // Taking user input after chapter
+                    g.showChapter(g.userPos); // Shows chapter of current node
+                    getline(cin, gameInput); // Taking user input based on chapter end
+                    if(gameInput == "9") // Opens in game menu if entered while in game
+                    {
+                        inGameMenu(); // Display in game menu
+                        getline(cin, game_Menu_Input); // taking user input
+                        if(game_Menu_Input == "1")
+                        {
+                            // Does nothing so returns back to game and current node
+                        }
+                        else if(game_Menu_Input == "2")
+                        {
+                            g.saveNode(); // Will save the current node and allow load new game
+                        }
+                        else if(game_Menu_Input == "3")
+                        {
+                            break; // Quits to main manu
+                        }
+                    }
+                    else // If not in game menu, takes user input and goes to chosen node
+                    {
+                        // Check to see if input is in rnge
+                        userInput = stoi(gameInput);
+                        int maxSize = g.userPos->Edges.size();
+                        if(0 <= userInput && userInput <= maxSize) // Checks to make sure choice is within limits of the current node
+                        {
+                            // Taking user input and change the user position to chosen node path
+                            g.userPos = g.makeChoice(userInput, g.userPos);
+                        }
+                        else
+                        {
+                            cout << "Invalid" << endl; // Invalid input and displays chapter again
+                        }
+                    }
+                }
+
             }
-            else
+            else // New game not loaded succesfully
             {
-                cout << "Failed to laod default game" << endl;
+                cout << "Error: Failed To Load Game" << endl;
+                break;
             }
-            g.printDFT(); // Check to make sure graph is initialized
-            // Need to implement makeChoice
         }
-        else if(menuInput == "2")
+        else if(menuInput == "2") // Will load previous save
         {
-            //loadPreviousGame(); // Implement if time allows
+            loadPreviousGame(); // Implement if time allows
         }
-        else if(menuInput == "3")
+        else if(menuInput == "3") // Will open options
         {
             options();
         }
-        else if(menuInput == "4")
+        else if(menuInput == "4") // Shows credits
         {
             credits();
         }
-        else if(menuInput == "5")
+        else if(menuInput == "5") // Exits game and quits
         {
-            cout << endl;
-            cout << "See you in another life mate" << endl;
-            cout << endl;
-            cout << " ██████╗  ██████╗  ██████╗ ██████╗ ██████╗ ██╗   ██╗███████╗" << endl;
-            cout << "██╔════╝ ██╔═══██╗██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝" << endl;
-            cout << "██║  ███╗██║   ██║██║   ██║██║  ██║██████╔╝ ╚████╔╝ █████╗" << endl;
-            cout << "██║   ██║██║   ██║██║   ██║██║  ██║██╔══██╗  ╚██╔╝  ██╔══╝" << endl;
-            cout << "╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝██████╔╝   ██║   ███████╗" << endl;
-            cout << " ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ╚══════╝" << endl;
+            endGameDisplay();
             break;
         }
         else
         {
-            cout << "INVALID INPUT" << endl;
+            cout << "INVALID INPUT" << endl; // If no valid option
         }
     }
 
