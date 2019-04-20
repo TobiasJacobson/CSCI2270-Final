@@ -7,11 +7,7 @@
 
 using namespace std;
 
-// cpp file intended to be for the bulk of the game as to remove it from the clutter of the intital stages
-
-//  Directed graph, allows user to back track after dying
-//  txt of final unique path
-//  cyclical
+// hpp file for most functions and structs used in game
 struct vertex;
 
 struct Edge
@@ -39,8 +35,8 @@ struct character
 class Game
 {
   public:
-    // Graph();
-    // ~Graph();
+    // Graph(); // No dynamic memory - so not needed
+    // ~Graph();// No dynamic memory - so not needed
     void addVertex(string identifier, string storyPart);
     void addEdge(string identifier1, string identifier2);
     void displayEdges();
@@ -50,9 +46,11 @@ class Game
     void saveProgress();
     bool loadGame(string txtFile);
     void saveNode();
-    void makeChoice(vertex *v); // Function to make choices
-    //vector<vertex> BFS(int componentNum, int src, int visited[])
+    void showChapter(vertex *curr);
+    vertex *makeChoice(int choice, vertex *v); // Function to make choices
+    vertex *startGame();
 
+    vertex *userPos; // Public variable to access the current user position 
   private:
     vector<vertex> vertices; //stores vertices
     vertex *currNode;
