@@ -35,15 +35,15 @@ void Game::addVertex(string identifier, string storyPart)
     newVertex.chapter = storyPart;
     vertices.push_back(newVertex);
 }
-void Game::addEdge(string storyPart1, string storyPart2)
+void Game::addEdge(string identifier1, string identifier2)
 {
     for(int i = 0; i < vertices.size(); i++)
     {
-         if(vertices[i].identifier == storyPart1)
+         if(vertices[i].identifier == identifier1)
          {
              for(int j = 0; j < vertices.size(); j++)
              {
-                 if(vertices[j].identifier == storyPart2 && i != j) // i != j bc then we'd pus_back not within the limits of the graph size
+                 if(vertices[j].identifier == identifier2 && i != j) // i != j bc then we'd pus_back not within the limits of the graph size
                  {
                     Edge aV;
                     aV.v = &vertices[j];
@@ -77,18 +77,6 @@ void Game::printDFT()
         DFT_traversal(&vertices[i]);
     }
 }
-void Game::printBFT()
-{
-    setAllVerticesUnvisited();
-    for(int i = 0; i < vertices.size(); i++)
-    {
-        if(vertices[i].visited == false)
-        {
-            vertices[i].visited = true;
-            BFT_traversal(&vertices[i]);
-        }
-    }
-}
 void Game::setAllVerticesUnvisited()
 {
     for(int i = 0; i < vertices.size(); i++)
@@ -113,26 +101,6 @@ vertex* Game::findVertex(string identifier){
     for(int i = 0; i < vertices.size(); i++)
     {
         vertex myV = DFS(&vertices[i], identifier);
-    }
-}
-void Game::BFT_traversal(vertex *v)
-{
-    list<vertex*> queue;
-    queue.push_back(v);
-    v->visited = true;
-    while(!queue.empty())
-    {
-        vertex *s = queue.front();
-        cout << s->identifier << endl;
-        queue.pop_front();
-        for(int i=0; i< s->Edges.size(); i++)
-        {
-            if(s->Edges[i].v->visited == false)
-            {
-                s->Edges[i].v->visited = true;
-                queue.push_back(s->Edges[i].v);
-            }
-        }
     }
 }
 void Game::DFT_traversal(vertex *v)
@@ -167,13 +135,92 @@ bool Game::loadGame(string txtFile)
     int i = 0;
     while(getline(inFile,line)) // reads storyline.txt line by line
     {
-        //getline(inFile,line)
+        // ADDING VERTICIES HERE
         identifier = arr[i];
         addVertex(identifier, line );
         i++;
     }
-
-
+    ////   EDGES ADDED HERE   /////////////////////////////////////////////////////////////////////////////////////////////
+    // 0's edges here
+    addEdge("0", "1");
+    addEdge("0", "2");
+    addEdge("0", "3");
+    // 1's edges here
+    addEdge("1", "1A");
+    addEdge("1", "1B");
+    addEdge("1", "1C");
+    // 1A's edges here
+    addEdge("1A", "1A_1");;
+    addEdge("1A", "1A_2");
+    // 1A_1's edges here
+    addEdge("1A_1", "1A_11");
+    // 1A_2's edges here
+    addEdge("1A_2", "1A_11");
+    // 1A_11's edges here
+    addEdge("1A_11", "1A_11_1");
+    addEdge("1A_11", "1A_11_2");
+    // 1B's edges here
+    // Has no edges
+    // 1C's edges here
+    addEdge("1C", "1C_1");
+    addEdge("1C", "1C_2");
+    addEdge("1C", "1C_3");
+    // 1C_1's edges here
+    addEdge("1C_1", "1C_11");
+    addEdge("1C_1", "3B_1");
+    // 1C_11's edges here
+    addEdge("1C_11", "1C_11_1");
+    addEdge("1C_11", "1C_11_2");
+    // iC_11_2's edges here
+    addEdge("1C_11_2", "1C_21");
+    // 1C_2's edges here
+    addEdge("1C_2", "1C_21");
+    // 1C_21's edges here
+    addEdge("1C_21", "1C_21_1");
+    addEdge("1C_21", "1C_21_2");
+    // 1C_3's edges here
+    // Has no edges
+    // 2's edges here
+    addEdge("2", "2A");
+    addEdge("2", "2B");
+    addEdge("2", "2C");
+    addEdge("2", "2D");
+    // 2A's edges here
+    addEdge("2A", "1A_11");
+    addEdge("2A", "0");
+    // 2B's edges here
+    // Has no edges
+    // 2C's edges here
+    // Has no edges
+    // 2D's edges here
+    // Has no edges
+    // 3's edges here
+    addEdge("3", "3A");
+    addEdge("3", "3B");
+    // 3A's edges here
+    // 3A has no edges
+    // 3B's edges here
+    addEdge("3B", "3B_1");
+    addEdge("3B", "3B_2");
+    // 3B_1's edges here
+    addEdge("3B_1", "3B_11");
+    addEdge("3B_2", "3B_12");
+    // 3B_1's edges here
+    // Has no edges
+    // 3B_11's edges here
+    // Has no edges
+    // 3B_12's edges here
+    addEdge("3B_12", "3B_12_1");
+    addEdge("3B_12", "3B_12_2");
+    // 3B_12_1's edges here
+    addEdge("3B_12_1", "1C_21");
+    // 3B_12_2's edges here
+    addEdge("3B_12_2", "3B_12_21");
+    addEdge("3B_12_2", "3B_12_22");
+    // 3B_2's edges here
+    addEdge("3B_2", "3");
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Creating new player struct obj. for this gameplay
     character player;
     player.fear = 0;
     player.roomGarageKey = false;
@@ -188,7 +235,15 @@ void Game::saveNode()
     // This way we can also add it to the unique output for the user in the txt file
 }
 
-void Game::makeChoice() // Function to make choices
+
+
+void Game::makeChoice(vertex *v) // Function to make choices
 {
-    // Left or right based on their choice
+    // To node based on user choice
+    // if(!v->visited) cout << v->identifier << endl;
+    // v->visited = true;
+    // if(!(v->Edges[i].v->visited == true))
+    // {
+    //     DFT_traversal(v->Edges[i].v);
+    // }
 }

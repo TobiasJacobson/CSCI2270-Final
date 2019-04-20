@@ -42,22 +42,21 @@ class Game
     // Graph();
     // ~Graph();
     void addVertex(string identifier, string storyPart);
-    void addEdge(string storyPart1, string storyPart2);
+    void addEdge(string identifier1, string identifier2);
     void displayEdges();
     void printDFT();
-    void printBFT();
     void setAllVerticesUnvisited();
 
     void saveProgress();
     bool loadGame(string txtFile);
     void saveNode();
-    void makeChoice(); // Function to make choices
+    void makeChoice(vertex *v); // Function to make choices
+    //vector<vertex> BFS(int componentNum, int src, int visited[])
 
   private:
     vector<vertex> vertices; //stores vertices
     vertex *currNode;
     vertex *findVertex(std::string name);
-    void BFT_traversal(vertex *v);
     void DFT_traversal(vertex *v);
 
 };

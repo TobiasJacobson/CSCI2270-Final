@@ -10,11 +10,10 @@
 
 using namespace std;
 
-// (1) New Game from top of BST
-// (2) Load Previous Game from previsouly saved tree nodes
-// (3) Options such as color? sounds?
-// (4) Credits for us and anything we want to say
-// (5) Quit Game and unsave
+// TODO:
+// Implement makeChoice();
+// Store player position using currNode to txt file
+//
 
 // Name Ideas:
 // Everdoom
@@ -50,7 +49,7 @@ void newGame()
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << endl;
-    cout << "Welcome to Bandersnatch -- The rules are quite simple really" << endl;
+    cout << "Welcome to Don't Stop -- The rules are quite simple really" << endl;
     cout << "Follow the storyline and when given a choice, choose the option you'd like to explore" << endl;
     cout << "Each choice leads you down a different road -- each with a different end" << endl;
     cout << "-Play several times to get various endings-" << endl;
@@ -73,7 +72,7 @@ void options()
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << endl;
-
+    cout << "Will implement if time allows" << endl;
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 
@@ -113,7 +112,8 @@ int main(int argc, char* argv[])
             {
                 cout << "Failed to laod default game" << endl;
             }
-            g.printDFT(); // Check to make sure graph is initialized
+            //g.displayEdges();
+            //g.printDFT(); // Check to make sure graph is initialized
             // Need to implement makeChoice
         }
         else if(menuInput == "2")
