@@ -12,8 +12,9 @@ using namespace std;
 
 // TODO:
 // Store player position using currNode to txt file
-// Save Function
-// Load function (based on name??)
+// Riddle
+// Searches
+
 
 
 void introDisplay() // Main menu for start of game
@@ -108,6 +109,9 @@ int main(int argc, char* argv[]) // Main for entire game
     string game_Menu_Input;
     int userInput;
     string saveProgress;
+    string newGameInput;
+    int nGI;
+    bool loadingNewGame = false;
     string storyTxt = argv[1];
     // Game intro displayed
     introDisplay();
@@ -125,16 +129,76 @@ int main(int argc, char* argv[]) // Main for entire game
             // getline(cin, menuInput);
         }
         // User input taken
-        getline(cin, menuInput);
+        if(loadingNewGame)
+        {
+
+        }
+        else
+        {
+            getline(cin, menuInput);
+        }
         if(menuInput == "1") // Option 1 to start a new game
         {
 
-            if(g.loadGame(storyTxt)) // New game loaded succesfully
+            if(!loadingNewGame)
             {
-                cout << "Game Loaded..." << endl;
-                cout << endl;
-                newGame();
-                g.userPos = g.startGame();
+                if(g.loadGame(storyTxt)) // New game loaded succesfully
+                {
+                    cout << "Game Loaded..." << endl;
+                    cout << endl;
+                    newGame();
+                    g.userPos = g.startGame();
+                    while(game_Menu_Input != "3") // While for in game inputs
+                    {
+                        // Taking user input after chapter
+                        g.showChapter(g.userPos); // Shows chapter of current node
+                        getline(cin, gameInput); // Taking user input based on chapter end
+                        if(gameInput == "9") // Opens in game menu if entered while in game
+                        {
+                            inGameMenu(); // Display in game menu
+                            getline(cin, game_Menu_Input); // taking user input
+                            if(game_Menu_Input == "1")
+                            {
+                                // Does nothing so returns back to game and current node
+                            }
+                            else if(game_Menu_Input == "2")
+                            {
+                                cout << "Enter username to save as: " << endl;
+                                getline(cin, saveProgress);
+                                g.saveNode(saveProgress, g.userPos, g.player); // Will save the current node and allow load new game
+                            }
+                            else if(game_Menu_Input == "3")
+                            {
+                                break; // Quits to main manu
+                            }
+                        }
+                        else // If not in game menu, takes user input and goes to chosen node
+                        {
+                            // Check to see if input is in rnge
+                            userInput = stoi(gameInput);
+                            int maxSize = g.userPos->Edges.size();
+                            if(0 <= userInput && userInput <= maxSize) // Checks to make sure choice is within limits of the current node
+                            {
+                                // Taking user input and change the user position to chosen node path
+                                g.userPos = g.makeChoice(userInput, g.userPos);
+                            }
+                            else
+                            {
+                                cout << "Invalid" << endl; // Invalid input and displays chapter again
+                            }
+                        }
+                    }
+
+                }
+                else // New game not loaded succesfully
+                {
+                    cout << "Error: Failed To Load Game" << endl;
+                    break;
+                }
+            }
+            else
+            {
+                loadingNewGame = false;
                 while(game_Menu_Input != "3") // While for in game inputs
                 {
                     // Taking user input after chapter
@@ -177,15 +241,21 @@ int main(int argc, char* argv[]) // Main for entire game
                 }
 
             }
-            else // New game not loaded succesfully
-            {
-                cout << "Error: Failed To Load Game" << endl;
-                break;
-            }
         }
         else if(menuInput == "2") // Will load previous save
         {
             g.loadPreviousGame(); // Implement if time allows
+            cout << "Which save do you want to load?" << endl;
+            getline(cin, newGameInput);
+            nGI = stoi(newGameInput);
+            g.generatePreviousGame(nGI);
+            loadingNewGame = true;
+            menuInput = "1";
+            // gameInput = "";
+            // game_Menu_Input = "";
+            // userInput = -1;
+
+            // introDisplay();
         }
         else if(menuInput == "3") // Will open options
         {
@@ -198,7 +268,7 @@ int main(int argc, char* argv[]) // Main for entire game
         else if(menuInput == "5") // Exits game and quits
         {
             endGameDisplay();
-            break;
+            // break;
         }
         else
         {

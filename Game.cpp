@@ -317,6 +317,7 @@ void Game::loadPreviousGame() // If time allows
     cout << endl;
     for(int i = 0; i < saves.size(); i++)
     {
+        cout << "(" << i << ")" << endl;
         cout << "Name: " << saves[i].saveName << endl;
         cout << "Progress: " << saves[i].savePos->identifier << endl;
         cout << " ############ " << endl;
@@ -326,7 +327,21 @@ void Game::loadPreviousGame() // If time allows
 
 }
 
-void Game::generatePreviousGame(string txtFile)
+void Game::generatePreviousGame(int user)
 {
-
+    bool inRange = false;
+    int maxSize = saves.size();
+    while(inRange == false)
+    {
+        if(user <= maxSize)
+        {
+            userPos = saves[user].savePos;
+            player = saves[user].saveCharacter;
+            inRange = true;
+        }
+        else
+        {
+            cout << "Enter a valid number" << endl;
+        }
+    }
 }

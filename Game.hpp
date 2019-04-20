@@ -54,7 +54,7 @@ class Game
     bool loadGame(string txtFile);
     void saveNode(string n, vertex *v, character *c);
     void loadPreviousGame();
-    void generatePreviousGame(string txtFile);
+    void generatePreviousGame(int user);
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
