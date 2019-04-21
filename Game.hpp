@@ -26,10 +26,10 @@ struct vertex
 struct character
 {
     int searchTimes = 0;
-    int fear; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
-    bool roomGarageKey; // A key that can be found in the first room
-    bool girlFound; // Bool to represent if the girl is found
-    bool potion; // Bool to represent if potion is found
+    int fear = 0; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    bool roomGarageKey = false; // A key that can be found in the first room
+    bool girlFound = false; // Bool to represent if the girl is found
+    bool potion = false; // Bool to represent if potion is found
     vertex *savePos;
     vector<string> fullPath;
 };
@@ -70,4 +70,3 @@ class Game
 };
 
 #endif
-

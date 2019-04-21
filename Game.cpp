@@ -258,10 +258,10 @@ bool Game::loadGame(string txtFile)
     // Creating new player struct obj. for this gameplay
     //character player;
     isGameOver = false;
-    player->fear = 0;
-    player->roomGarageKey = false;
-    player->girlFound = false;
-    player->potion = false;
+    // player->roomGarageKey = false;
+    // player->girlFound = false;
+    // player->potion = false;
+
     return true;
 }
 

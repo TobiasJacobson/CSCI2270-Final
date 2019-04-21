@@ -149,6 +149,7 @@ int main(int argc, char* argv[]) // Main for entire game
 
             if(!loadingNewGame)
             {
+
                 if(g.loadGame(storyTxt)) // New game loaded succesfully
                 {
                     cout << "Game Loaded..." << endl;
@@ -279,4 +280,3 @@ int main(int argc, char* argv[]) // Main for entire game
     }
 
 }
-
