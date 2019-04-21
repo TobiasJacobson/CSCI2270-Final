@@ -437,4 +437,14 @@ void Game::checkConditions(character *characterPosition)
         showChapter(userPos);
         isGameOver = true;
     }
+    checkSegFault(*characterPosition);
+}
+
+void Game::checkSegFault(character *characterPosition)
+{
+  //SegFault
+  if(userPos->identifier == "3B_2")
+  {
+    userPos->identifier = "3";
+  }
 }
