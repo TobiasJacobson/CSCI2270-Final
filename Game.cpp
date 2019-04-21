@@ -387,6 +387,41 @@ void Game::checkConditions(character *characterPosition)
             break;
         }
     }
+    if(characterPosition->savePos.identifier = "3B_1")
+    {
+        int riddleNum = rand()% 2 + 1; // 1-3 int
+        string ans; //user input
+        bool correct = false; //riddle correct
+
+        if(riddleNum == 1)
+        {
+            cout << "Poor people have it. Rich people need it. If you eat it you die. What is it?" << endl;
+            cin >> ans;
+            if(ans == "Nothing" || ans == "nothing") correct = true;
+        }
+        else if(riddleNum == 2)
+        {
+            cout << "There are 12 white socks and 12 black socks in a drawer in a completely dark room. How many socks must you pull out to get a pair?" << endl;
+            cin >> ans;
+            if(ans == "3" || ans == "three" || ans == "Three") correct = true;
+        }
+        else
+        {
+            cout << "I stay in the corner yet I travel around the world. What am I?" << endl;
+            cin >> ans;
+            if(ans == "stamp" || ans == "Stamp" || ans == "A stamp" || ans == "a stamp") correct = true;
+        }
+        if(correct == true)
+        {
+            vertex* next = findVertex("3B_12"); //To find potion
+            userPos = next;
+        }
+        else
+        {
+            vertex* next = findVertex("3B_11"); //die
+            userPos = next;
+        }
+    }
 
 
 }
