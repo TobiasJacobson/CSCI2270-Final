@@ -1,20 +1,34 @@
-The storyline for our Bandersnatch game which will be parsed in the BANDERSNATCH.cpp main function
-
-
-to parse data use integers and mod operator??
-    - https://www.reddit.com/r/Bandersnatch/comments/aatkkp/how_to_go_to_any_scene_in_the_movie/
-    - using alphabet and integers (A1 - A2 - A3 ... B1 - B2 etc.)
-A1
-A2
-A3
-A4
-
-B1
-B2
-B3
-B4
-
-C1
-C2
-C3
-C4
+0 
+1
+2
+3
+1A_1
+1A_2
+1A_11
+1A_11_1
+1A_11_2
+1B
+1C
+1C_1
+1C_11
+1C_11_1
+1C_11_2
+1C_2
+1C_21
+1C_21_1
+1C_21_2
+1C_3
+2A
+2B
+2C
+2D
+3A
+3B
+3B_1
+3B_11
+3B_12
+3B_12_1
+3B_12_2
+3B_12_21
+3B_12_22
+3B_2
