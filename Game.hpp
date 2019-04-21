@@ -25,18 +25,13 @@ struct vertex
 
 struct character
 {
-    //int search;
+    int searchTimes = 0;
     int fear; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
     bool roomGarageKey; // A key that can be found in the first room
     bool girlFound; // Bool to represent if the girl is found
     bool potion; // Bool to represent if potion is found
-};
-
-struct savedNode
-{
-    string saveName;
     vertex *savePos;
-    character *saveCharacter;
+    vector<string> fullPath;
 };
 
 class Game
@@ -58,12 +53,13 @@ class Game
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
+    void riddle(character *characterPosition);
     void checkConditions(character *characterPosition);
+
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
     character *player;
-    bool isGameOver;
   private:
     vector<vertex> vertices; //stores vertices
     vector<savedNode> saves; // Stores saves
