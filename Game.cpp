@@ -389,41 +389,50 @@ void Game::riddle(character* characterPosition)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Game::checkConditions(character *characterPosition)
 {
-    if(characterPosition->savePos.identifier == "2B")
+    //roomGarageKey
+    if(characterPosition->identifier == "2B") 
     {
         characterPosition.roomGarageKey = true;
     }
-    if(characterPosition->savePos.identifier == "1C_11")
+    //girlFound
+    if(characterPosition->identifier == "1C_11") 
     {
         characterPosition.girlFound = true;
     }
-    if(characterPosition->savePos.identifier = "3B_12")
+    //potion
+    if(characterPosition->identifier = "3B_12") 
     {
         characterPosition.potion = true;
     }
-    if(characterPosition->savePos.identifier = "2C" || characterPosition->savePos.identifier = "1" || characterPosition->savePos.identifier = "1A" || characterPosition->savePos.identifier = "1A_2" ||
-    characterPosition->savePos.identifier = "1C_1" || characterPosition->savePos.identifier = "1C_2" || characterPosition->savePos.identifier = "3B_2" || characterPosition->savePos.identifier = "3B_12_2" ||
-    characterPosition->savePos.identifier = "2A" || characterPosition->savePos.identifier = "1A_11" || characterPosition->savePos.identifier = "3B_12_1")
+    //Fear increases
+    if(characterPosition->identifier = "2C" || characterPosition->identifier = "1" || characterPosition->identifier = "1A" || characterPosition->identifier = "1A_2" ||
+    characterPosition->identifier = "1C_1" || characterPosition->identifier = "1C_2" || characterPosition->identifier = "3B_2" || characterPosition->identifier = "3B_12_2" ||
+    characterPosition->identifier = "2A" || characterPosition->identifier = "1A_11" || characterPosition->identifier = "3B_12_1")
     {
         int addFear = rand()% 20 + 10;
         characterPosition.fear += addFear;
     }
-    if(characterPosition->savePos.identifier = "3B_1") //Shadow man 
+    //Shadow man and riddle
+    if(characterPosition->identifier = "3B_1") //Shadow man
     {
         riddle(characterPosition);
     }
-    if(characterPosition->savePos.identifier = "2D" && characterPosition.SearchTimes > 2) //Too many searches
+    //Search too many times
+    if(characterPosition->identifier = "2D" && characterPosition.SearchTimes > 2) //Too many searches
     {
         showChapter(userPos);
         isGameOver = true;
     }
-    if(characterPosition->fear >= 100)
+    //Die from fear
+    if(characterPosition->fear >= 100) 
     {
+        cout << "Knees shaking, you collapse to the ground. You can't take the stress anymore! You black out and never wake up." << endl;
         isGameOver = true;
     }
-    if(characterPosition->savePos.identifier = "1B" || characterPosition->savePos.identifier = "1A_1" || characterPosition->savePos.identifier = "1A_11_1" ||
-    characterPosition->savePos.identifier = "1C_3" || characterPosition->savePos.identifier = "1C_11_1" || characterPosition->savePos.identifier = "1C_21_2" || characterPosition->savePos.identifier = "3A" ||
-    characterPosition->savePos.identifier = "3B_11" || characterPosition->savePos.identifier = "3B_12_21" || characterPosition->savePos.identifier = "3B_12_22")
+    //Nodes where you die
+    if(characterPosition->identifier = "1B" || characterPosition->identifier = "1A_1" || characterPosition->identifier = "1A_11_1" ||
+    characterPosition->identifier = "1C_3" || characterPosition->identifier = "1C_11_1" || characterPosition->identifier = "1C_21_2" || characterPosition->identifier = "3A" ||
+    characterPosition->identifier = "3B_11" || characterPosition->identifier = "3B_12_21" || characterPosition->identifier = "3B_12_22")
     {
         showChapter(userPos);
         isGameOver = true;
