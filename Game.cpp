@@ -373,8 +373,22 @@ void Game::checkConditions(character *characterPosition)
     }
     if(characterPosition->savePos.identifier = "3B_1")
     {
-        
+
     }
+
+
+    if(characterPosition->savePos.identifier = "1B" || characterPosition->savePos.identifier = "2D" || characterPosition->savePos.identifier = "1A_1" || characterPosition->savePos.identifier = "1A_11_1" ||
+    characterPosition->savePos.identifier = "1C_3" || characterPosition->savePos.identifier = "1C_11_1" || characterPosition->savePos.identifier = "1C_21_2" || characterPosition->savePos.identifier = "3A" ||
+    characterPosition->savePos.identifier = "3B_11" || characterPosition->savePos.identifier = "3B_12_21" || characterPosition->savePos.identifier = "3B_12_22")
+    {
+        if(characterPosition->savePos.identifier = "2D" && characterPosition.SearchTimes > 2)
+        {
+            showChapter(currNode);
+            break;
+        }
+    }
+
+
 }
 
 

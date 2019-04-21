@@ -25,6 +25,7 @@ struct vertex
 
 struct character
 {
+    //int search;
     int fear; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
     bool roomGarageKey; // A key that can be found in the first room
     bool girlFound; // Bool to represent if the girl is found
