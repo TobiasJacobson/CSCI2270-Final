@@ -60,6 +60,7 @@ class Game
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
     character *player;
+    bool isGameOver;
   private:
     vector<vertex> vertices; //stores vertices
     vector<savedNode> saves; // Stores saves
