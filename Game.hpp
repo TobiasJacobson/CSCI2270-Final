@@ -53,7 +53,7 @@ class Game
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
-    void riddle(character *characterPosition);
+    void riddle();
     void checkConditions(character *characterPosition);
 
 
@@ -63,7 +63,6 @@ class Game
     bool isGameOver;
   private:
     vector<vertex> vertices; //stores vertices
-    vector<savedNode> saves; // Stores saves
     vertex *currNode;
     vertex *findVertex(std::string name);
     void DFT_traversal(vertex *v);
@@ -71,3 +70,4 @@ class Game
 };
 
 #endif
+
