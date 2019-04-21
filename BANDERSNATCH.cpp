@@ -152,9 +152,11 @@ int main(int argc, char* argv[]) // Main for entire game
 
                 if(g.loadGame(storyTxt)) // New game loaded succesfully
                 {
+                    
                     cout << "Game Loaded..." << endl;
                     cout << endl;
                     newGame();
+                    g.player = g.characterStart();
                     g.userPos = g.startGame();
                     while(game_Menu_Input != "3") // While for in game inputs
                     {
@@ -195,8 +197,8 @@ int main(int argc, char* argv[]) // Main for entire game
                                 cout << "Invalid" << endl; // Invalid input and displays chapter again
                             }
                         }
+                        g.checkConditions(g.player);
                     }
-
                 }
                 else // New game not loaded succesfully
                 {
