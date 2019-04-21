@@ -257,6 +257,7 @@ bool Game::loadGame(string txtFile)
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Creating new player struct obj. for this gameplay
     //character player;
+    isGameOver = false;
     player->fear = 0;
     player->roomGarageKey = false;
     player->girlFound = false;
@@ -300,7 +301,7 @@ vertex *Game::makeChoice(int choice, vertex *v) // Function allowing user to mak
     if(0 <= choice && choice <= maxSize)
     {
         vertex *newVertex;
-        newVertex = v->Edges[choice].v;
+        newVertex = v->Edges[choice-1].v;
         return newVertex;
     }
     else
@@ -373,22 +374,6 @@ void Game::checkConditions(character *characterPosition)
     }
     if(characterPosition->savePos.identifier = "3B_1")
     {
-
-    }
-
-
-    if(characterPosition->savePos.identifier = "1B" || characterPosition->savePos.identifier = "2D" || characterPosition->savePos.identifier = "1A_1" || characterPosition->savePos.identifier = "1A_11_1" ||
-    characterPosition->savePos.identifier = "1C_3" || characterPosition->savePos.identifier = "1C_11_1" || characterPosition->savePos.identifier = "1C_21_2" || characterPosition->savePos.identifier = "3A" ||
-    characterPosition->savePos.identifier = "3B_11" || characterPosition->savePos.identifier = "3B_12_21" || characterPosition->savePos.identifier = "3B_12_22")
-    {
-        if(characterPosition->savePos.identifier = "2D" && characterPosition.SearchTimes > 2)
-        {
-            showChapter(currNode);
-            break;
-        }
-    }
-    if(characterPosition->savePos.identifier = "3B_1")
-    {
         int riddleNum = rand()% 2 + 1; // 1-3 int
         string ans; //user input
         bool correct = false; //riddle correct
@@ -422,8 +407,18 @@ void Game::checkConditions(character *characterPosition)
             userPos = next;
         }
     }
-
-
+    if(characterPosition->savePos.identifier = "2D" && characterPosition.SearchTimes > 2)
+    {
+        showChapter(userPos);
+        isGameOver = true;
+    }
+    if(characterPosition->savePos.identifier = "1B" || characterPosition->savePos.identifier = "1A_1" || characterPosition->savePos.identifier = "1A_11_1" ||
+    characterPosition->savePos.identifier = "1C_3" || characterPosition->savePos.identifier = "1C_11_1" || characterPosition->savePos.identifier = "1C_21_2" || characterPosition->savePos.identifier = "3A" ||
+    characterPosition->savePos.identifier = "3B_11" || characterPosition->savePos.identifier = "3B_12_21" || characterPosition->savePos.identifier = "3B_12_22")
+    {
+        showChapter(userPos);
+        isGameOver = true;
+    }
 }
 
 

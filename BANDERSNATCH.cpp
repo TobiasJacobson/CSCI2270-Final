@@ -12,10 +12,7 @@ using namespace std;
 
 // TODO:
 // Store player position using currNode to txt file
-// Riddles for specified vertices
-// Searches RNG on specific vertices
-//          - Add new struct and set all other vertices to include NULL while if/if for specfic vertices
-
+// Return after 3B_2 to 3B
 
 
 void introDisplay() // Main menu for start of game
@@ -55,6 +52,15 @@ void endGameDisplay() // End of game display
     cout << "██║   ██║██║   ██║██║   ██║██║  ██║██╔══██╗  ╚██╔╝  ██╔══╝" << endl;
     cout << "╚██████╔╝╚██████╔╝╚██████╔╝██████╔╝██████╔╝   ██║   ███████╗" << endl;
     cout << " ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ╚══════╝" << endl;
+}
+void gameOverOutro()
+{
+    cout << "   ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗     " << endl;
+    cout << "  ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗    " << endl;
+    cout << "  ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝    " << endl;
+    cout << "  ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗    " << endl;
+    cout << "  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║    " << endl;
+    cout << "   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝    " << endl;
 }
 void newGame() // Intro to a new game
 {
@@ -118,7 +124,11 @@ int main(int argc, char* argv[]) // Main for entire game
     introDisplay();
     while(menuInput != "5") // While for main menu
     {
-
+        if(isGameOver)
+        {
+            gameOverOutro();
+            break;
+        }
         if(game_Menu_Input == "3")
         {
             // Game intro displayed && variables reset
@@ -151,6 +161,11 @@ int main(int argc, char* argv[]) // Main for entire game
                     g.userPos = g.startGame();
                     while(game_Menu_Input != "3") // While for in game inputs
                     {
+                        g.checkConditions();
+                        if(isGameOver)
+                        {
+                            break;
+                        }
                         // Taking user input after chapter
                         g.showChapter(g.userPos); // Shows chapter of current node
                         getline(cin, gameInput); // Taking user input based on chapter end
@@ -240,7 +255,6 @@ int main(int argc, char* argv[]) // Main for entire game
                         }
                     }
                 }
-
             }
         }
         else if(menuInput == "2") // Will load previous save
