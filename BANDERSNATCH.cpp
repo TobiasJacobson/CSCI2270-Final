@@ -166,6 +166,67 @@ int main(int argc, char* argv[]) // Main for entire game
                         {
                             break;
                         }
+                        else
+                        {
+                            // Taking user input after chapter
+                            g.showChapter(g.userPos); // Shows chapter of current node
+                            getline(cin, gameInput); // Taking user input based on chapter end
+                            if(gameInput == "9") // Opens in game menu if entered while in game
+                            {
+                                inGameMenu(); // Display in game menu
+                                getline(cin, game_Menu_Input); // taking user input
+                                if(game_Menu_Input == "1")
+                                {
+                                    // Does nothing so returns back to game and current node
+                                }
+                                else if(game_Menu_Input == "2")
+                                {
+                                    cout << "Enter username to save as: " << endl;
+                                    getline(cin, saveProgress);
+                                    g.saveNode(saveProgress, g.userPos, g.player); // Will save the current node and allow load new game
+                                }
+                                else if(game_Menu_Input == "3")
+                                {
+                                    break; // Quits to main manu
+                                }
+                            }
+                            else // If not in game menu, takes user input and goes to chosen node
+                            {
+                                // Check to see if input is in rnge
+                                userInput = stoi(gameInput);
+                                int maxSize = g.userPos->Edges.size();
+                                if(0 <= userInput && userInput <= maxSize) // Checks to make sure choice is within limits of the current node
+                                {
+                                    // Taking user input and change the user position to chosen node path
+                                    g.userPos = g.makeChoice(userInput, g.userPos);
+                                }
+                                else
+                                {
+                                    cout << "Invalid" << endl; // Invalid input and displays chapter again
+                                }
+                            }
+                        }
+                    }
+
+                }
+                else // New game not loaded succesfully
+                {
+                    cout << "Error: Failed To Load Game" << endl;
+                    break;
+                }
+            }
+            else
+            {
+                loadingNewGame = false;
+                while(game_Menu_Input != "3") // While for in game inputs
+                {
+                    g.checkConditions();
+                    if(isGameOver)
+                    {
+                        break;
+                    }
+                    else
+                    {
                         // Taking user input after chapter
                         g.showChapter(g.userPos); // Shows chapter of current node
                         getline(cin, gameInput); // Taking user input based on chapter end
@@ -204,56 +265,7 @@ int main(int argc, char* argv[]) // Main for entire game
                             }
                         }
                     }
-
-                }
-                else // New game not loaded succesfully
-                {
-                    cout << "Error: Failed To Load Game" << endl;
-                    break;
-                }
-            }
-            else
-            {
-                loadingNewGame = false;
-                while(game_Menu_Input != "3") // While for in game inputs
-                {
-                    // Taking user input after chapter
-                    g.showChapter(g.userPos); // Shows chapter of current node
-                    getline(cin, gameInput); // Taking user input based on chapter end
-                    if(gameInput == "9") // Opens in game menu if entered while in game
-                    {
-                        inGameMenu(); // Display in game menu
-                        getline(cin, game_Menu_Input); // taking user input
-                        if(game_Menu_Input == "1")
-                        {
-                            // Does nothing so returns back to game and current node
-                        }
-                        else if(game_Menu_Input == "2")
-                        {
-                            cout << "Enter username to save as: " << endl;
-                            getline(cin, saveProgress);
-                            g.saveNode(saveProgress, g.userPos, g.player); // Will save the current node and allow load new game
-                        }
-                        else if(game_Menu_Input == "3")
-                        {
-                            break; // Quits to main manu
-                        }
-                    }
-                    else // If not in game menu, takes user input and goes to chosen node
-                    {
-                        // Check to see if input is in rnge
-                        userInput = stoi(gameInput);
-                        int maxSize = g.userPos->Edges.size();
-                        if(0 <= userInput && userInput <= maxSize) // Checks to make sure choice is within limits of the current node
-                        {
-                            // Taking user input and change the user position to chosen node path
-                            g.userPos = g.makeChoice(userInput, g.userPos);
-                        }
-                        else
-                        {
-                            cout << "Invalid" << endl; // Invalid input and displays chapter again
-                        }
-                    }
+                    // Adding to full path
                 }
             }
         }
@@ -287,3 +299,4 @@ int main(int argc, char* argv[]) // Main for entire game
     }
 
 }
+
