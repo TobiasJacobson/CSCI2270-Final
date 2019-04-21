@@ -12,8 +12,9 @@ using namespace std;
 
 // TODO:
 // Store player position using currNode to txt file
-// Riddle
-// Searches
+// Riddles for specified vertices
+// Searches RNG on specific vertices
+//          - Add new struct and set all other vertices to include NULL while if/if for specfic vertices
 
 
 
@@ -251,11 +252,6 @@ int main(int argc, char* argv[]) // Main for entire game
             g.generatePreviousGame(nGI);
             loadingNewGame = true;
             menuInput = "1";
-            // gameInput = "";
-            // game_Menu_Input = "";
-            // userInput = -1;
-
-            // introDisplay();
         }
         else if(menuInput == "3") // Will open options
         {

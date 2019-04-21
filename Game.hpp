@@ -17,7 +17,6 @@ struct Edge
 
 struct vertex
 {
-    //character *player;
     string identifier; // Identifier of the node
     string chapter; // Chapter or string for storyPart
     bool visited;
@@ -58,6 +57,7 @@ class Game
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
+    void checkConditions();
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
