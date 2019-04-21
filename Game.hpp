@@ -7,11 +7,7 @@
 
 using namespace std;
 
-// cpp file intended to be for the bulk of the game as to remove it from the clutter of the intital stages
-
-//  Directed graph, allows user to back track after dying
-//  txt of final unique path
-//  cyclical
+// hpp file for most functions and structs used in game
 struct vertex;
 
 struct Edge
@@ -21,7 +17,6 @@ struct Edge
 
 struct vertex
 {
-    //character *player;
     string identifier; // Identifier of the node
     string chapter; // Chapter or string for storyPart
     bool visited;
@@ -30,34 +25,46 @@ struct vertex
 
 struct character
 {
-    int sanity; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
-    bool roomGarageKey; // A key that can be found in the first room
-    bool girlFound; // Bool to represent if the girl is found
-    bool potion; // Bool to represent if potion is found
+    int searchTimes = 0;
+    int fear = 0; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    bool roomGarageKey = false; // A key that can be found in the first room
+    bool girlFound = false; // Bool to represent if the girl is found
+    bool potion = false; // Bool to represent if potion is found
+    vertex *savePos;
+    vector<string> fullPath;
 };
 
 class Game
 {
   public:
-    // Graph();
-    // ~Graph();
+    // Graph(); // No dynamic memory - so not needed
+    // ~Graph();// No dynamic memory - so not needed
     void addVertex(string identifier, string storyPart);
-    void addEdge(string storyPart1, string storyPart2);
+    void addEdge(string identifier1, string identifier2);
     void displayEdges();
     void printDFT();
-    void printBFT();
     void setAllVerticesUnvisited();
 
     void saveProgress();
-    void loadGame(string txtFile);
-    void saveNode();
-    void makeChoice(); // Function to make choices
+    bool loadGame(string txtFile);
+    void saveNode(string n, vertex *v, character *c);
+    void loadPreviousGame();
+    void generatePreviousGame(int user);
+    void showChapter(vertex *curr);
+    vertex *makeChoice(int choice, vertex *v); // Function to make choices
+    vertex *startGame();
+    void riddle();
+    void checkConditions(character *characterPosition);
 
+
+    vertex *userPos; // Public variable to access the current user position
+    vertex *savedProgress; // Public variable to allow loading of a new game
+    character *player;
+    bool isGameOver;
   private:
     vector<vertex> vertices; //stores vertices
     vertex *currNode;
     vertex *findVertex(std::string name);
-    void BFT_traversal(vertex *v);
     void DFT_traversal(vertex *v);
 
 };
