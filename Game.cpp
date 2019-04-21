@@ -271,11 +271,11 @@ void Game::saveNode(string name, vertex *userPosition, character *c) // Will sav
 {
     // To save and distrubt the current location
     // This way we can also add it to the unique output for the user in the txt file
-    savedNode newSave;
-    newSave.saveName = name;
-    newSave.savePos = userPosition;
-    newSave.saveCharacter = c;
-    saves.push_back(newSave);
+    // savedNode newSave;
+    // newSave.saveName = name;
+    // newSave.savePos = userPosition;
+    // newSave.saveCharacter = c;
+    // saves.push_back(newSave);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -316,13 +316,13 @@ void Game::loadPreviousGame() // If time allows
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << endl;
-    for(int i = 0; i < saves.size(); i++)
-    {
-        cout << "(" << i << ")" << endl;
-        cout << "Name: " << saves[i].saveName << endl;
-        cout << "Progress: " << saves[i].savePos->identifier << endl;
-        cout << " ############ " << endl;
-    }
+    // for(int i = 0; i < saves.size(); i++)
+    // {
+    //     cout << "(" << i << ")" << endl;
+    //     cout << "Name: " << saves[i].saveName << endl;
+    //     cout << "Progress: " << saves[i].savePos->identifier << endl;
+    //     cout << " ############ " << endl;
+    // }
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 
@@ -332,25 +332,25 @@ void Game::loadPreviousGame() // If time allows
 
 void Game::generatePreviousGame(int user)
 {
-    bool inRange = false;
-    int maxSize = saves.size();
-    while(inRange == false)
-    {
-        if(user <= maxSize)
-        {
-            userPos = saves[user].savePos;
-            player = saves[user].saveCharacter;
-            inRange = true;
-        }
-        else
-        {
-            cout << "Enter a valid number" << endl;
-        }
-    }
+    // bool inRange = false;
+    // int maxSize = saves.size();
+    // while(inRange == false)
+    // {
+    //     if(user <= maxSize)
+    //     {
+    //         userPos = saves[user].savePos;
+    //         player = saves[user].saveCharacter;
+    //         inRange = true;
+    //     }
+    //     else
+    //     {
+    //         cout << "Enter a valid number" << endl;
+    //     }
+    // }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Game::riddle(character* characterPosition)
+void Game::riddle()
 {
     int riddleNum = rand()% 2 + 1; // 1-3 int
     string ans; //user input
@@ -390,59 +390,51 @@ void Game::riddle(character* characterPosition)
 void Game::checkConditions(character *characterPosition)
 {
     //roomGarageKey
-    if(characterPosition->identifier == "2B") 
+    if(userPos->identifier == "2B")
     {
-        characterPosition.roomGarageKey = true;
+        characterPosition->roomGarageKey = true;
     }
     //girlFound
-    if(characterPosition->identifier == "1C_11") 
+    if(userPos->identifier == "1C_11")
     {
-        characterPosition.girlFound = true;
+        characterPosition->girlFound = true;
     }
     //potion
-    if(characterPosition->identifier = "3B_12") 
+    if(userPos->identifier == "3B_12")
     {
-        characterPosition.potion = true;
+        characterPosition->potion = true;
     }
     //Fear increases
-    if(characterPosition->identifier = "2C" || characterPosition->identifier = "1" || characterPosition->identifier = "1A" || characterPosition->identifier = "1A_2" ||
-    characterPosition->identifier = "1C_1" || characterPosition->identifier = "1C_2" || characterPosition->identifier = "3B_2" || characterPosition->identifier = "3B_12_2" ||
-    characterPosition->identifier = "2A" || characterPosition->identifier = "1A_11" || characterPosition->identifier = "3B_12_1")
+    if(userPos->identifier == "2C" || userPos->identifier == "1" || userPos->identifier == "1A" || userPos->identifier == "1A_2" ||
+    userPos->identifier == "1C_1" || userPos->identifier == "1C_2" || userPos->identifier == "3B_2" || userPos->identifier == "3B_12_2" ||
+    userPos->identifier == "2A" || userPos->identifier == "1A_11" || userPos->identifier == "3B_12_1")
     {
         int addFear = rand()% 20 + 10;
-        characterPosition.fear += addFear;
+        characterPosition->fear += addFear;
     }
     //Shadow man and riddle
-    if(characterPosition->identifier = "3B_1") //Shadow man
+    if(userPos->identifier == "3B_1") //Shadow man
     {
-        riddle(characterPosition);
+        riddle();
     }
     //Search too many times
-    if(characterPosition->identifier = "2D" && characterPosition.SearchTimes > 2) //Too many searches
+    if(userPos->identifier == "2D" && characterPosition->searchTimes > 2) //Too many searches
     {
         showChapter(userPos);
         isGameOver = true;
     }
     //Die from fear
-    if(characterPosition->fear >= 100) 
+    if(characterPosition->fear >= 100)
     {
         cout << "Knees shaking, you collapse to the ground. You can't take the stress anymore! You black out and never wake up." << endl;
         isGameOver = true;
     }
     //Nodes where you die
-    if(characterPosition->identifier = "1B" || characterPosition->identifier = "1A_1" || characterPosition->identifier = "1A_11_1" ||
-    characterPosition->identifier = "1C_3" || characterPosition->identifier = "1C_11_1" || characterPosition->identifier = "1C_21_2" || characterPosition->identifier = "3A" ||
-    characterPosition->identifier = "3B_11" || characterPosition->identifier = "3B_12_21" || characterPosition->identifier = "3B_12_22")
+    if(userPos->identifier == "1B" || userPos->identifier == "1A_1" || userPos->identifier == "1A_11_1" ||
+    userPos->identifier == "1C_3" || userPos->identifier == "1C_11_1" || userPos->identifier == "1C_21_2" || userPos->identifier == "3A" ||
+    userPos->identifier == "3B_11" || userPos->identifier == "3B_12_21" || userPos->identifier == "3B_12_22")
     {
         showChapter(userPos);
         isGameOver = true;
     }
 }
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
