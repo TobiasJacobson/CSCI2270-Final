@@ -350,27 +350,30 @@ void Game::generatePreviousGame(int user)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void checkConditions()
+void Game::checkConditions(character *characterPosition)
 {
-    if(identifier == "2B")
+    if(characterPosition->savePos.identifier == "2B")
     {
-        newVertex.key = true;
+        characterPosition.roomGarageKey = true;
     }
-    else
+    if(characterPosition->savePos.identifier == "1C_11")
     {
-        newVertex.key = false;
+        characterPosition.girlFound = true;
     }
-    if(identifier == "1C_11")
+    if(characterPosition->savePos.identifier = "3B_12")
     {
-        newVertex.girl = true;
+        characterPosition.potion = true;
     }
-    else
+    if(characterPosition->savePos.identifier = "2C" || characterPosition->savePos.identifier = "1" || characterPosition->savePos.identifier = "1A" || characterPosition->savePos.identifier = "1A_2" ||
+    characterPosition->savePos.identifier = "1C_1" || characterPosition->savePos.identifier = "1C_2" || characterPosition->savePos.identifier = "3B_2" || characterPosition->savePos.identifier = "3B_12_2" ||
+    characterPosition->savePos.identifier = "2A" || characterPosition->savePos.identifier = "1A_11" || characterPosition->savePos.identifier = "3B_12_1")
     {
-        newVertex.girl = false;
+        int addFear = rand()% 20 + 10;
+        characterPosition.fear += addFear;
     }
-    if(identifier = "3B_12")
+    if(characterPosition->savePos.identifier = "3B_1")
     {
-        newVertex.pot
+        
     }
 }
 

@@ -57,7 +57,7 @@ class Game
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
     vertex *startGame();
-    void checkConditions();
+    void checkConditions(character *characterPosition);
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
