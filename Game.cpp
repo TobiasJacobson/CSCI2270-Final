@@ -103,27 +103,19 @@ void Game::setAllVerticesUnvisited() // Will set all verticies as unvisited
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-vertex *DFS(vertex *v, string identifier) // Helper function for findVertex to traverse vertices in DFT order
+vertex *Game::findVertex(string identifier) // Allows you to search a specific vertex in verticies
 {
-    if(!(v->identifier == identifier)) return v;
-    v->visited = true;
-
-    for(int i = 0; i < v->Edges.size(); i++)
+    int pos = -1;
+    string arr[] = {"0", "1", "2", "3", "1A","1A_1", "1A_2", "1A_11", "1A_11_1", "1A_11_2", "1B", "1C", "1C_1", "1C_11", "1C_11_1", "1C_11_2", "1C_2", "1C_21", "1C_21_1", "1C_21_2", "1C_3", "3A", "3B", "3B_1", "3B_11", "3B_12", "3B_12_1", "3B_12_2", "3B_12_21", "3B_12_22", "3B_2" }; // 31
+    for(int i = 0; i < 31; i++)
     {
-        if(!(v->Edges[i].v->visited == true))
+        if(arr[i] == identifier)
         {
-            DFS(v->Edges[i].v, identifier);
+            pos = i;
         }
     }
-}
-vertex* Game::findVertex(string identifier) // Allows you to search a specific vertex in verticies
-{
-    vertex *myV = NULL;
-    for(int i = 0; i < vertices.size(); i++)
-    {
-        myV = DFS(&vertices[i], identifier);
-    }
-    return myV;
+
+    return &vertices[pos];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,18 +225,6 @@ bool Game::loadGame(string txtFile)
     // 2's edges here
     addEdge("2", "0");
     addEdge("2", "1A_11");
-    // addEdge("2", "2B");
-    // addEdge("2", "2C");
-    // addEdge("2", "2D");
-    // // 2A's edges here
-    // addEdge("2A", "1A_11");
-    // addEdge("2A", "0");
-    // 2B's edges here
-    // Has no edges
-    // 2C's edges here
-    // Has no edges
-    // 2D's edges here
-    // Has no edges
     // 3's edges here
     addEdge("3", "3A");
     addEdge("3", "3B");
@@ -270,37 +250,18 @@ bool Game::loadGame(string txtFile)
     addEdge("3B_12_2", "3B_12_22");
     // 3B_2's edges here
     addEdge("3B_2", "3");
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
     // Creating new player struct obj. for this gameplay
     //character player;
     isGameOver = false;
-    // player->roomGarageKey = false;
-    // player->girlFound = false;
-    // player->potion = false;
-
+    isGameWon = false;
     return true;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Game::saveNode(string name, vertex *userPosition, character *c) // Will save current user postion and allow for a loadPreviousGame() function call
-{
-    // To save and distrubt the current location
-    // This way we can also add it to the unique output for the user in the txt file
-    // savedNode newSave;
-    // newSave.saveName = name;
-    // newSave.savePos = userPosition;
-    // newSave.saveCharacter = c;
-    // saves.push_back(newSave);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 vertex *Game::startGame() // Returns the first user postion of vertices[0]
 {
-    // player->roomGarageKey = false;
-    // player->girlFound = false;
-    // player->potion = false;
     return &vertices[0];
 }
 
@@ -330,91 +291,46 @@ vertex *Game::makeChoice(int choice, vertex *v) // Function allowing user to mak
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Game::loadPreviousGame() // If time allows
-{
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-    cout << endl;
-    // for(int i = 0; i < saves.size(); i++)
-    // {
-    //     cout << "(" << i << ")" << endl;
-    //     cout << "Name: " << saves[i].saveName << endl;
-    //     cout << "Progress: " << saves[i].savePos->identifier << endl;
-    //     cout << " ############ " << endl;
-    // }
-    cout << endl;
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Game::generatePreviousGame(int user)
-{
-    // bool inRange = false;
-    // int maxSize = saves.size();
-    // while(inRange == false)
-    // {
-    //     if(user <= maxSize)
-    //     {
-    //         userPos = saves[user].savePos;
-    //         player = saves[user].saveCharacter;
-    //         inRange = true;
-    //     }
-    //     else
-    //     {
-    //         cout << "Enter a valid number" << endl;
-    //     }
-    // }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Game::riddle()
+bool Game::riddle()
 {
     int riddleNum = rand()% 2 + 1; // 1-3 int
     string ans; //user input
-    bool correct = false; //riddle correct
 
     if(riddleNum == 1)
     {
         cout << "Poor people have it. Rich people need it. If you eat it you die. What is it?" << endl;
-        cin >> ans;
-        if(ans == "Nothing" || ans == "nothing") correct = true;
+        getline(cin, ans);
+        if(ans == "Nothing" || ans == "nothing") return true;
+        return false;
     }
-    else if(riddleNum == 2)
+    if(riddleNum == 2)
     {
         cout << "There are 12 white socks and 12 black socks in a drawer in a completely dark room. How many socks must you pull out to get a pair?" << endl;
-        cin >> ans;
-        if(ans == "3" || ans == "three" || ans == "Three") correct = true;
+        getline(cin, ans);
+        if(ans == "3" || ans == "three" || ans == "Three") return true;
+        return false;
     }
-    else
+    if(riddleNum == 3)
     {
         cout << "I stay in the corner yet I travel around the world. What am I?" << endl;
-        cin >> ans;
-        if(ans == "stamp" || ans == "Stamp" || ans == "A stamp" || ans == "a stamp") correct = true;
+        getline(cin, ans);
+        if(ans == "stamp" || ans == "Stamp" || ans == "A stamp" || ans == "a stamp") return true;
+        return false;
     }
-    if(correct == true)
-    {
-        vertex* next = findVertex("3B_12"); //To find potion
-        userPos = next;
-    }
-    else
-    {
-        vertex* next = findVertex("3B_11"); //die
-        userPos = next;
-    }
+    return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Game::checkConditions(character *characterPosition)
 {
+    int riddleCorrect = false;
     //Search too many times
     if(characterPosition->searchTimes >= 2) //Too many searches
     {
         cout << "You peer around again, desperately hoping to find something that help you get out safely. You are so busy studying the contents of the boxes you barely notice the shadow of the figure until its fingers close over your neck and crush. -See you in another life-" << endl;
         isGameOver = true;
     }
-    else if(userPos->identifier == "2")
+    if(userPos->identifier == "2")
     {
         characterPosition->searchTimes++;
         int randGen = rand()%9 + 1;
@@ -423,8 +339,6 @@ void Game::checkConditions(character *characterPosition)
             cout << "You found a hidden hatch!" << endl;
             userPos = userPos->Edges[1].v;
             cout << endl;
-            //showChapter(userPos);
-
         }
         else if(randGen > 3 && randGen < 7) // Garage Key
         {
@@ -432,7 +346,6 @@ void Game::checkConditions(character *characterPosition)
             characterPosition->roomGarageKey = true;
             userPos = userPos->Edges[0].v;
             cout << endl;
-            //showChapter(userPos);
         }
         else if(randGen > 7 && randGen <= 10) // Severed head
         {
@@ -441,7 +354,6 @@ void Game::checkConditions(character *characterPosition)
             cout << "You decide it’s best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
             userPos = userPos->Edges[0].v;
             cout << endl;
-            // showChapter(userPos);
         }
         else
         {
@@ -449,48 +361,83 @@ void Game::checkConditions(character *characterPosition)
         }
     }
     //girlFound
-    else if(userPos->identifier == "1C_11")
+    if(userPos->identifier == "1C_11")
     {
         characterPosition->girlFound = true;
     }
+    //Shadow man and riddle
+     if(userPos->identifier == "3B_1") //Shadow man
+    {
+        if(riddle())
+        {
+            userPos = userPos->Edges[1].v;
+        }
+        else
+        {
+            userPos = userPos->Edges[0].v;
+        }
+    }
     //potion
-    else if(userPos->identifier == "3B_12")
+    if(userPos->identifier == "3B_12")
     {
         characterPosition->potion = true;
     }
     //Fear increases
-    else if(userPos->identifier == "1" || userPos->identifier == "1A" || userPos->identifier == "1A_2" ||
+    if(userPos->identifier == "1" || userPos->identifier == "1A" || userPos->identifier == "1A_2" ||
     userPos->identifier == "1C_1" || userPos->identifier == "1C_2" || userPos->identifier == "3B_2" || userPos->identifier == "3B_12_2"
     || userPos->identifier == "1A_11" || userPos->identifier == "3B_12_1")
     {
         int addFear = rand()% 20 + 10;
         characterPosition->fear += addFear;
     }
-    //Shadow man and riddle
-    else if(userPos->identifier == "3B_1") //Shadow man
-    {
-        riddle();
-    }
     //Die from fear
-    else if(characterPosition->fear >= 100)
+    if(characterPosition->fear >= 100)
     {
         cout << "Knees shaking, you collapse to the ground. You can't take the stress anymore! You black out and never wake up." << endl;
         isGameOver = true;
     }
     //Nodes where you die
-    else if(userPos->identifier == "1B" || userPos->identifier == "1A_1" || userPos->identifier == "1A_11_1" ||
+    if(userPos->identifier == "1B" || userPos->identifier == "1A_1" || userPos->identifier == "1A_11_1" ||
     userPos->identifier == "1C_3" || userPos->identifier == "1C_11_1" || userPos->identifier == "1C_21_2" || userPos->identifier == "3A" ||
     userPos->identifier == "3B_11" || userPos->identifier == "3B_12_21" || userPos->identifier == "3B_12_22")
     {
-        // showChapter(userPos);
+        cout << "In the spur of the moment you made a decision. A decision you thought would keep you alive. Oh how wrong you were, because before you know it you everything goes dark and the last thing you are the creatures glowing red eyes." << endl;
         isGameOver = true;
     }
-    else if(userPos->identifier == "3B_2")
+    if(userPos->identifier == "3B_2")
     {
-      userPos = findVertex("3");
+      userPos = userPos->Edges[0].v;
+    }
+    if(userPos->identifier == "1A_11_2")
+    {
+        isGameWon = true;
+    }
+    if(userPos->identifier == "1C_21_1")
+    {
+        if(characterPosition->girlFound == true)
+        {
+            isGameWon = true;
+        }
+        else
+        {
+            isGameOver = true;
+        }
+    }
+    if(userPos->identifier == "1C_21_1")
+    {
+        if(characterPosition->girlFound == true)
+        {
+            isGameWon = true;
+        }
+        else
+        {
+            isGameOver = true;
+        }
     }
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 character *Game::characterStart()
 {
@@ -503,3 +450,16 @@ character *Game::characterStart()
     userPlayer.push_back(userStart);
     return &userPlayer[0];
 }
+character *Game::characterReboot(int search, int fear, bool key, bool girl, bool pot)
+{
+    character userStart;
+    userStart.searchTimes = 0;
+    userStart.fear = 0; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    userStart.roomGarageKey = false; // A key that can be found in the first room
+    userStart.girlFound = false; // Bool to represent if the girl is found
+    userStart.potion = false; // Bool to represent if potion is found
+    userPlayer.push_back(userStart);
+    return &userPlayer[0];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
