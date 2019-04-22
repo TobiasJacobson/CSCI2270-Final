@@ -388,6 +388,24 @@ void Game::checkConditions(character *characterPosition)
     {
         characterPosition->girlFound = true;
     }
+    // 30% chance of dying in play room
+    if(userPos->identifier == "1A_1")
+    {
+        cou << "You enter the playroom, choosing the creepy dolls over total darkness. You pick  your way through the toys, careful not to disturb their rest. Suddenly out of the corner of your eye a rocking horse in the darkest corner starts moving back and forth, seemingly of its own accord. You freeze. Then a toy soldier floats into the air and is lifted around. You stand like a statue as one toy at a time is “played with” and the trail of paranormal activity is slowly coming towards you. You can barely see the outline of a figure with long arms and legs and a strange head. The toy closest to you, a doll wearing a torn dress, is hoisted into the air and spun around and then is dropped to the floor. You get the feeling you are next." << endl;
+        //////////////////////////////////////////////////
+        int randGen = rand()%9 + 1;
+        if(randGen > 0 && randGen < 4)
+        {
+            cout << "You stand motionless, your heart beating so hard you’re sure anything in the room could hear it. Just as you feel the sinister presence has passed, you are picked up as if you weighed nothing and slammed into the floor. You scream in terror and pain and your vision goes red. You hear an angry hiss and long, rough fingers close around your neck. You struggle in vain against the superhuman strength but you cannot escape. You lose consciousness, becoming a better plaything for the monster. -See you in another life-" << endl;
+            isGameOver = true;
+        }
+        else
+        {
+            cout << "You wait in silence for the entity to “play” with you, motionless for at least five minutes, but nothing happens. You get the feeling you need to keep moving so after mustering your courage you start sneaking towards the other side of the room where a ladder leads up to darkness. Successfully avoiding making too much noise you grasp the ladder and begin to climb out of the room." << endl;
+            userPos = userPos->Edges[0].v;
+            cout << endl;
+        }
+    }
     //Shadow man and riddle
      if(userPos->identifier == "3B_1") //Shadow man
     {
@@ -486,9 +504,9 @@ character *Game::characterReboot(int search, int fear, bool key, bool girl, bool
     character userStart;
     userStart.searchTimes = 0;
     userStart.fear = 0; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
-    userStart.roomGarageKey = false; // A key that can be found in the first room
-    userStart.girlFound = false; // Bool to represent if the girl is found
-    userStart.potion = false; // Bool to represent if potion is found
+    userStart.roomGarageKey = key; // A key that can be found in the first room
+    userStart.girlFound = girl; // Bool to represent if the girl is found
+    userStart.potion = pot; // Bool to represent if potion is found
     userPlayer.push_back(userStart);
     return &userPlayer[0];
 }
