@@ -147,6 +147,21 @@ void Game::saveProgress()
 {
     // Need some way to store the current vertex and keep track of where the user is.
     // will also allow to load a previous game
+    cout << "Enter a name for the save file" << endl;
+    string fileN; //file's name
+    getline(cin, fileN);
+    fileN = fileN + ".txt"; //make it a txt file
+    ofstream saveState;
+    saveState.open(fileN); //create new file
+    saveState << userPos->identifier << "\n";
+    saveState << player->searchTimes << "\n";
+    saveState << player->fear << "\n";
+    saveState << player->roomGarageKey << "\n";
+    saveState << player->girlFound << "\n";
+    saveState << player->potion << "\n";
+    saveState.close();
+    cout << "Save file created" << endl;
+    return;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
