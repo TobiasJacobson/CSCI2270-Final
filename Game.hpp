@@ -25,20 +25,19 @@ struct vertex
 
 struct character
 {
-    int searchTimes;// = 0;
-    int fear;// = 0; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
-    bool roomGarageKey;// = false; // A key that can be found in the first room
-    bool girlFound;// = false; // Bool to represent if the girl is found
-    bool potion;// = false; // Bool to represent if potion is found
     character()
     {
         searchTimes = 0;
         fear = 0;
-        roomGarageKey = false; // A key that can be found in the first room
-        girlFound = false; // Bool to represent if the girl is found
-        potion = false; // B
+        roomGarageKey = false;
+        girlFound = false;
+        potion = false;
     }
-    vertex *savePos;
+    int searchTimes;
+    int fear; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    bool roomGarageKey; // A key that can be found in the first room
+    bool girlFound; // Bool to represent if the girl is found
+    bool potion; // Bool to represent if potion is found
     //vector<string> fullPath;
 };
 
@@ -53,7 +52,7 @@ class Game
     void printDFT();
     void setAllVerticesUnvisited();
 
-    void saveProgress();
+    void saveProgress(); //create txt file with save
     bool loadGame(string txtFile);
     void saveNode(string n, vertex *v, character *c);
     void loadPreviousGame();
@@ -64,7 +63,6 @@ class Game
     void riddle();
     void checkConditions(character *characterPosition);
     character *characterStart();
-
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
@@ -80,3 +78,4 @@ class Game
 };
 
 #endif
+
