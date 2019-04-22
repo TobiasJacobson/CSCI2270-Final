@@ -115,6 +115,9 @@ void credits() // Credits to developers (Us)
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MAIN
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char* argv[]) // Main for entire game
 {
     // Struct declaration
@@ -162,7 +165,8 @@ int main(int argc, char* argv[]) // Main for entire game
         {
             getline(cin, menuInput);
         }
-        // Start of game
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // START GAME
         if(menuInput == "1") // Option 1 to start a new game
         {
 
@@ -171,8 +175,9 @@ int main(int argc, char* argv[]) // Main for entire game
 
                 cout << "Game Loaded..." << endl;
                 cout << endl;
-
-                if(loadSavedGame) //if loading from a txt file
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // LOADING GAME FROM TXT FILE
+                if(loadSavedGame)
                 {
                     cout << "Enter the .txt file that contains your info" << endl;
                     string saveName;
@@ -188,19 +193,21 @@ int main(int argc, char* argv[]) // Main for entire game
                     bool garage;
                     bool girl;
                     bool pot;
-                    while(getline(saveFile, textLine)) // Runs until reaches last file line when no next line to get
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // Runs until reaches last file line when no next line to get
+                    while(getline(saveFile, textLine))
                     {
                         userPosition = textLine;
                         cout << "User Position: " << userPosition << endl;
                         /////////////
                         getline(saveFile, iden);
                         searchNum = stoi(iden);
-                        cout << "searchTimes: " << iden << endl;
-                        ///////////
+                        cout << "Times Searched: " << iden << endl;
+                        ////////////
                         getline(saveFile, iden);
                         fear = stoi(iden);
                         cout << "Fear: " << iden << endl;
-                        //////////
+                        ////////////
                         getline(saveFile, iden);
                         if(iden == "0")
                         {
@@ -210,8 +217,8 @@ int main(int argc, char* argv[]) // Main for entire game
                         {
                             garage = true;
                         }
-                        cout << "Garage: " << garage << endl;
-                        ////////
+                        cout << "GarageKey: " << garage << endl;
+                        ////////////
                         getline(saveFile, iden);
                         if(iden == "0")
                         {
@@ -221,7 +228,7 @@ int main(int argc, char* argv[]) // Main for entire game
                         {
                             girl = true;
                         }
-                        cout << "Girl: " << girl << endl;
+                        cout << "GirlFound: " << girl << endl;
                         ////////////
                         getline(saveFile, iden);
                         if(iden == "0")
@@ -235,23 +242,28 @@ int main(int argc, char* argv[]) // Main for entire game
                         cout << "Potion: " << pot << endl;
                     }
 
-                    cout << "Character loaded" << endl;
+                    cout << "Character loaded succesfully\n\n";
                     g.player = g.characterReboot(searchNum, fear, garage, girl, pot);
                     g.userPos = g.findVertex(userPosition);
                 }
-                else //if freshgame
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // NEW GAME
+                else
                 {
                     g.player = g.characterStart();
                     g.userPos = g.startGame();
                     newGame();
                 }
-                while(game_Menu_Input != "3") // While for in game inputs
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // ACTUALLY RUNS THROUGH THE GAME
+                while(game_Menu_Input != "3")
                 {
                     // Taking user input after chapter
-                    cout << "Show" << endl;
                     g.showChapter(g.userPos); // Shows chapter of current node
                     getline(cin, gameInput); // Taking user input based on chapter end
-                    if(gameInput == "9") // Opens in game menu if entered while in game
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // OPENS IN GAME MENU
+                    if(gameInput == "9")
                     {
                         inGameMenu(); // Display in game menu
                         getline(cin, game_Menu_Input); // taking user input
@@ -268,7 +280,9 @@ int main(int argc, char* argv[]) // Main for entire game
                             break; // Quits to main manu
                         }
                     }
-                    else // If not in game menu, takes user input and goes to chosen node
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // If not in game menu, takes user input and goes to chosen node
+                    else
                     {
                         // Check to see if input is in rnge
                         userInput = stoi(gameInput);
@@ -300,25 +314,34 @@ int main(int argc, char* argv[]) // Main for entire game
                 break;
             }
         }
-        else if(menuInput == "2") // Will load previous save
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // LOAD A PREVIOUS GAME
+        else if(menuInput == "2")
         {
 
             loadSavedGame = true;
             menuInput = "1";
         }
-        else if(menuInput == "3") // Shows credits
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SHOW CREDITS
+        else if(menuInput == "3")
         {
             credits();
         }
-        else if(menuInput == "4") // Exits game and quits
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // EXIT GAME AND QUIT
+        else if(menuInput == "4")
         {
             endGameDisplay();
             // break;
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // IF AN INVALID INPUT IS ENTERED
         else
         {
-            cout << "INVALID INPUT" << endl; // If no valid option
+            cout << "INVALID INPUT" << endl;
         }
     }
 
 }
+
