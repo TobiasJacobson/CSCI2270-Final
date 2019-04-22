@@ -8,13 +8,16 @@
 using namespace std;
 
 // hpp file for most functions and structs used in game
-struct vertex;
 
+struct vertex; // So it can be referenced in Edge struct
+
+// Struct of Edges to each vertex
 struct Edge
 {
     vertex *v;
 };
 
+// Struct of vertices in the graph
 struct vertex
 {
     string identifier; // Identifier of the node
@@ -23,25 +26,26 @@ struct vertex
     vector<Edge> Edges; //stores edges to adjacent vertices
 };
 
+// Struct for the player
 struct character
 {
-    int searchTimes;
-    int fear; // This will effect players ability to make certain choices (ex. Broken leg, can't climb)
+    int searchTimes; // Keeps track of times user has searched
+    int fear; // This will effect players ability to make certain choices
     bool roomGarageKey; // A key that can be found in the first room
     bool girlFound; // Bool to represent if the girl is found
     bool potion; // Bool to represent if potion is found
-    character()
+    character() // Constructor for character struct
     {
         searchTimes = 0;
         fear = 0;
-        roomGarageKey = false; // A key that can be found in the first room
-        girlFound = false; // Bool to represent if the girl is found
-        potion = false; // B
+        roomGarageKey = false;
+        girlFound = false;
+        potion = false;
     }
-    vertex *savePos;
     //vector<string> fullPath;
 };
 
+// Class for most game functions
 class Game
 {
   public:
@@ -58,24 +62,22 @@ class Game
     bool loadGame(string txtFile);
     void showChapter(vertex *curr);
     vertex *makeChoice(int choice, vertex *v); // Function to make choices
-    vertex *startGame();
-    bool riddle();
-    void checkConditions(character *characterPosition);
-    character *characterStart();
-    character *characterReboot(int, int, bool, bool, bool);
+    vertex *startGame(); // Returns user start position
+    bool riddle(); // Asks user a riddle
+    void checkConditions(character *characterPosition); // Checks all conditions
+    character *characterStart(); // Creates a new character
+    character *characterReboot(int, int, bool, bool, bool); // Loads a previous character
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
-    character *player;
-    bool isGameOver;
-    bool isGameWon = false;
+    character *player; // Public access to user at all times
+    bool isGameOver; // If game is ended or user is killed
+    bool isGameWon = false; // If game is won or user escapes
   private:
     vector<vertex> vertices; //stores vertices
-    vector<character> userPlayer;
+    vector<character> userPlayer; // Stores players
     vertex *currNode;
-
     void DFT_traversal(vertex *v);
-
 };
 
 #endif
