@@ -62,6 +62,7 @@ void gameOverOutro()
     cout << "  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║    " << endl;
     cout << "   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝    " << endl;
 }
+
 void newGame() // Intro to a new game
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -117,8 +118,7 @@ int main(int argc, char* argv[]) // Main for entire game
     int userInput;
     string saveProgress;
     string newGameInput;
-    int nGI;
-    bool loadingNewGame = false;
+    bool loadSavedGame = false; //if a saved game is being used
     string storyTxt = argv[1];
     // Game intro displayed
     introDisplay();
@@ -135,84 +135,47 @@ int main(int argc, char* argv[]) // Main for entire game
             introDisplay();
             // getline(cin, menuInput);
         }
+
         // User input taken
-        if(loadingNewGame)
+        if(loadSavedGame) //if loading from a txt file
         {
 
+            //g.player =
+            //g.userPos =
         }
-        else
+        else //
         {
             getline(cin, menuInput);
         }
-        if(menuInput == "1") // Option 1 to start a new game
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // START GAME
+        if(menuInput == "1")
         {
-
-            if(!loadingNewGame)
+            if(g.loadGame(storyTxt)) // Load chapters from Storyline.txt and adds all edges
             {
-
-                if(g.loadGame(storyTxt)) // New game loaded succesfully
+                cout << "Game Loaded..." << endl;
+                cout << endl;
+                if(loadSavedGame) //if loading from a txt file
                 {
 
-                    cout << "Game Loaded..." << endl;
-                    cout << endl;
-                    newGame();
+                    //g.player =
+                    //g.userPos =
+                }
+                else //if freshgame
+                {
                     g.player = g.characterStart();
                     g.userPos = g.startGame();
-                    while(game_Menu_Input != "3") // While for in game inputs
-                    {
-                        // Taking user input after chapter
-                        g.showChapter(g.userPos); // Shows chapter of current node
-                        getline(cin, gameInput); // Taking user input based on chapter end
-                        if(gameInput == "9") // Opens in game menu if entered while in game
-                        {
-                            inGameMenu(); // Display in game menu
-                            getline(cin, game_Menu_Input); // taking user input
-                            if(game_Menu_Input == "1")
-                            {
-                                // Does nothing so returns back to game and current node
-                            }
-                            else if(game_Menu_Input == "2")
-                            {
-                                cout << "Enter username to save as: " << endl;
-                                getline(cin, saveProgress);
-                                g.saveNode(saveProgress, g.userPos, g.player); // Will save the current node and allow load new game
-                            }
-                            else if(game_Menu_Input == "3")
-                            {
-                                break; // Quits to main manu
-                            }
-                        }
-                        else // If not in game menu, takes user input and goes to chosen node
-                        {
-                            // Check to see if input is in rnge
-                            userInput = stoi(gameInput);
-                            int maxSize = g.userPos->Edges.size();
-                            if(0 <= userInput && userInput <= maxSize) // Checks to make sure choice is within limits of the current node
-                            {
-                                // Taking user input and change the user position to chosen node path
-                                g.userPos = g.makeChoice(userInput, g.userPos);
-                            }
-                            else
-                            {
-                                cout << "Invalid" << endl; // Invalid input and displays chapter again
-                            }
-                        }
-                        g.checkConditions(g.player);
-                    }
                 }
-                else // New game not loaded succesfully
-                {
-                    cout << "Error: Failed To Load Game" << endl;
-                    break;
-                }
-            }
-            else
-            {
-                loadingNewGame = false;
+                newGame(); //Intro text
+
+                //Acutally runs game
                 while(game_Menu_Input != "3") // While for in game inputs
                 {
                     // Taking user input after chapter
                     g.showChapter(g.userPos); // Shows chapter of current node
+                    cout << "fLaG" << endl;
                     getline(cin, gameInput); // Taking user input based on chapter end
                     if(gameInput == "9") // Opens in game menu if entered while in game
                     {
@@ -222,15 +185,15 @@ int main(int argc, char* argv[]) // Main for entire game
                         {
                             // Does nothing so returns back to game and current node
                         }
+                        //Save progress to txt file
                         else if(game_Menu_Input == "2")
                         {
-                            cout << "Enter username to save as: " << endl;
-                            getline(cin, saveProgress);
-                            g.saveNode(saveProgress, g.userPos, g.player); // Will save the current node and allow load new game
+                            g.saveProgress();
                         }
+                        // Quits to main manu
                         else if(game_Menu_Input == "3")
                         {
-                            break; // Quits to main manu
+                            break;
                         }
                     }
                     else // If not in game menu, takes user input and goes to chosen node
@@ -248,33 +211,69 @@ int main(int argc, char* argv[]) // Main for entire game
                             cout << "Invalid" << endl; // Invalid input and displays chapter again
                         }
                     }
+                    g.checkConditions(g.player);
                 }
-
+            }
+            // New game not loaded succesfully
+            else
+            {
+                cout << "Error: Failed To Load Game" << endl;
+                break;
             }
         }
-        else if(menuInput == "2") // Will load previous save
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //LOAD SAVED GAME
+        else if(menuInput == "2")
         {
-            g.loadPreviousGame(); // Implement if time allows
-            cout << "Which save do you want to load?" << endl;
-            getline(cin, newGameInput);
-            nGI = stoi(newGameInput);
-            g.generatePreviousGame(nGI);
-            loadingNewGame = true;
+            cout << "Enter the .txt file that contains your info" << endl;
+            string saveName;
+            getline(cin, saveName);
+            ifstream saveFile;
+            saveFile.open(saveName);
+
+            string iden; //identifier
+            getline(saveFile, iden);
+            //string iden = getlin(saveFile, iden);
+            g.userPos = g.findVertex(iden);
+            cout << "userPos done" << endl;
+
+            getline(saveFile, iden);
+            //cout << g.player->searchTimes << endl;
+            g.player->searchTimes = stoi(iden);
+            getline(saveFile, iden);
+            g.player->fear = stoi(iden);
+            getline(saveFile, iden);
+            g.player->roomGarageKey = stoi(iden);
+            getline(saveFile, iden);
+            g.player->girlFound = stoi(iden);
+            getline(saveFile, iden);
+            g.player->potion = stoi(iden);
+            //count++;
+            cout << "Character loaded" << endl;
+            loadSavedGame = true;
             menuInput = "1";
         }
-        else if(menuInput == "3") // Shows credits
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // SHOW CREDITS
+        else if(menuInput == "3")
         {
             credits();
         }
-        else if(menuInput == "4") // Exits game and quits
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // EXIT GAME
+        else if(menuInput == "4")
         {
             endGameDisplay();
             // break;
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         else
         {
             cout << "INVALID INPUT" << endl; // If no valid option
         }
     }
-
 }
