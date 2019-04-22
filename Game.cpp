@@ -417,8 +417,8 @@ void Game::checkConditions(character *characterPosition)
     else if(userPos->identifier == "2")
     {
         characterPosition->searchTimes++;
-        int randGen = rand()%2 + 1;
-        if(randGen == 1) // Finding hatch
+        int randGen = rand()%9 + 1;
+        if(randGen > 0 && randGen < 4) // Finding hatch
         {
             cout << "You found a hidden hatch!" << endl;
             userPos = userPos->Edges[1].v;
@@ -426,7 +426,7 @@ void Game::checkConditions(character *characterPosition)
             //showChapter(userPos);
 
         }
-        else if(randGen == 2) // Garage Key
+        else if(randGen > 3 && randGen < 7) // Garage Key
         {
             cout << "You decide it’s best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. On the shelves behind you are see some dusty plates and mugs which look like they haven’t been moved in years. Higher up you notice a small ragged sack tucked into the corner. You pull it down and begin loosening the knot on it, but to your surprise the knot breaks as you pick at it. Peering into the bag, unable to see in the dim light, you hesitantly stick your hand in and pull out a rusty key. Hoping it could be useful you put the key in your back pocket. You found a key! The key has been added to your inventory. Continue exploring to find what the key opens." << endl;
             characterPosition->roomGarageKey = true;
@@ -434,7 +434,7 @@ void Game::checkConditions(character *characterPosition)
             cout << endl;
             //showChapter(userPos);
         }
-        else if(randGen == 3) // Severed head
+        else if(randGen > 7 && randGen <= 10) // Severed head
         {
             int addFear = rand()% 20 + 10;
             characterPosition->fear += addFear;
