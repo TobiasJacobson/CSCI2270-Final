@@ -62,7 +62,15 @@ void gameOverOutro()
     cout << "  ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║    " << endl;
     cout << "   ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝    " << endl;
 }
-
+void gameWonOutro()
+{
+    cout << "██╗   ██╗ ██████╗ ██╗   ██╗    ███████╗███████╗ ██████╗ █████╗ ██████╗ ███████╗██████╗ ██╗" << endl;
+    cout << "╚██╗ ██╔╝██╔═══██╗██║   ██║    ██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗██║" << endl;
+    cout << " ╚████╔╝ ██║   ██║██║   ██║    █████╗  ███████╗██║     ███████║██████╔╝█████╗  ██║  ██║██║" << endl;
+    cout << "  ╚██╔╝  ██║   ██║██║   ██║    ██╔══╝  ╚════██║██║     ██╔══██║██╔═══╝ ██╔══╝  ██║  ██║╚═╝" << endl;
+    cout << "   ██║   ╚██████╔╝╚██████╔╝    ███████╗███████║╚██████╗██║  ██║██║     ███████╗██████╔╝██╗" << endl;
+    cout << "   ╚═╝    ╚═════╝  ╚═════╝     ╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═════╝ ╚═╝" << endl;
+}
 void newGame() // Intro to a new game
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -124,7 +132,16 @@ int main(int argc, char* argv[]) // Main for entire game
     introDisplay();
     while(menuInput != "4") // While for main menu
     {
-
+        if(g.isGameOver)
+        {
+            gameOverOutro();
+            break;
+        }
+        if(g.isGameWon)
+        {
+            gameWonOutro();
+            break;
+        }
         if(game_Menu_Input == "3")
         {
             // Game intro displayed && variables reset
@@ -175,7 +192,6 @@ int main(int argc, char* argv[]) // Main for entire game
                 {
                     // Taking user input after chapter
                     g.showChapter(g.userPos); // Shows chapter of current node
-                    cout << "fLaG" << endl;
                     getline(cin, gameInput); // Taking user input based on chapter end
                     if(gameInput == "9") // Opens in game menu if entered while in game
                     {
@@ -212,6 +228,14 @@ int main(int argc, char* argv[]) // Main for entire game
                         }
                     }
                     g.checkConditions(g.player);
+                    if(g.isGameOver)
+                    {
+                        break;
+                    }
+                    if(g.isGameWon)
+                    {
+                        break;
+                    }
                 }
             }
             // New game not loaded succesfully
