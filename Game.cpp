@@ -365,7 +365,7 @@ void Game::checkConditions(character *characterPosition)
         }
         else if(randGen > 3 && randGen < 7) // Finding Garage Key
         {
-            cout << "You decide it’s best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. On the shelves behind you are see some dusty plates and mugs which look like they haven’t been moved in years. Higher up you notice a small ragged sack tucked into the corner. You pull it down and begin loosening the knot on it, but to your surprise the knot breaks as you pick at it. Peering into the bag, unable to see in the dim light, you hesitantly stick your hand in and pull out a rusty key. Hoping it could be useful you put the key in your back pocket. You found a key! The key has been added to your inventory. Continue exploring to find what the key opens." << endl;
+            cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. On the shelves behind you are see some dusty plates and mugs which look like they haven't been moved in years. Higher up you notice a small ragged sack tucked into the corner. You pull it down and begin loosening the knot on it, but to your surprise the knot breaks as you pick at it. Peering into the bag, unable to see in the dim light, you hesitantly stick your hand in and pull out a rusty key. Hoping it could be useful you put the key in your back pocket. You found a key! The key has been added to your inventory. Continue exploring to find what the key opens." << endl;
             characterPosition->roomGarageKey = true;
             userPos = userPos->Edges[0].v;
             cout << endl;
@@ -374,7 +374,7 @@ void Game::checkConditions(character *characterPosition)
         {
             int addFear = rand()% 20 + 10;
             characterPosition->fear += addFear;
-            cout << "You decide it’s best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
+            cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
             userPos = userPos->Edges[0].v;
             cout << endl;
         }
@@ -401,7 +401,7 @@ void Game::checkConditions(character *characterPosition)
         }
         else
         {
-            cout << "You wait in silence for the entity to “play” with you, motionless for at least five minutes, but nothing happens. You get the feeling you need to keep moving so after mustering your courage you start sneaking towards the other side of the room where a ladder leads up to darkness. Successfully avoiding making too much noise you grasp the ladder and begin to climb out of the room." << endl;
+            cout << "You wait in silence for the entity to 'play' with you, motionless for at least five minutes, but nothing happens. You get the feeling you need to keep moving so after mustering your courage you start sneaking towards the other side of the room where a ladder leads up to darkness. Successfully avoiding making too much noise you grasp the ladder and begin to climb out of the room." << endl;
             userPos = userPos->Edges[0].v;
             cout << endl;
         }
