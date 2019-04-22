@@ -25,19 +25,19 @@ void introDisplay() // Main menu for start of game
     cout << "|                ██║  ██║██║   ██║██║╚██╗██║   ██║       ╚════██║   ██║   ██║   ██║██╔═══╝                  |" << endl;
     cout << "|                ██████╔╝╚██████╔╝██║ ╚████║   ██║       ███████║   ██║   ╚██████╔╝██║                      |" << endl;
     cout << "|                ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝   ╚═╝       ╚══════╝   ╚═╝    ╚═════╝ ╚═╝                      |" << endl;
-    cout << "|                                  ___________                    _______________                           |" << endl;
-    cout << "|                                 |  __   __  |                  |- ___________ -|                          |" << endl;
-    cout << "|                                 | |  | |  | |                  | |  _ _ _ _  | |                          |" << endl;
-    cout << "|                                 | |  | |  | |                  | | | | | | | | |                          |" << endl;
-    cout << "|                                 | |  | |  | |                  | | |-+-+-+-| | |                          |" << endl;
-    cout << "|      (1) New Game               | |__| |__| |                  | | |_|_|_|_| | |                          |" << endl;
-    cout << "|      (2) Load Previous Game     |  __   __()|                  | |    ___    | |                          |" << endl;
-    cout << "|      (3) Options                | |  | |  | |                  | |   [___] ()| |                          |" << endl;
-    cout << "|      (4) Credits                | |  | |  | |                  | |         ||| |                          |" << endl;
-    cout << "|      (5) Quit Game              | |  | |  | |                  | |         ()| |                          |" << endl;
-    cout << "|                                 | |  | |  | |                  | |           | |                          |" << endl;
-    cout << "|                                 | |__| |__| |                  | |           | |                          |" << endl;
-    cout << "|                                 |___________|                  |_|___________|_|                          |" << endl;
+    cout << "|                                     ___________                    _______________                        |" << endl;
+    cout << "|                                    |  __   __  |                  |- ___________ -|                       |" << endl;
+    cout << "|                                    | |  | |  | |                  | |  _ _ _ _  | |                       |" << endl;
+    cout << "|                                    | |  | |  | |                  | | | | | | | | |                       |" << endl;
+    cout << "|                                    | |  | |  | |                  | | |-+-+-+-| | |                       |" << endl;
+    cout << "|      (1) New Game                  | |__| |__| |                  | | |_|_|_|_| | |                       |" << endl;
+    cout << "|      (2) Load Previous Game        |  __   __()|                  | |    ___    | |                       |" << endl;
+    cout << "|      (3) Credits                   | |  | |  | |                  | |   [___] ()| |                       |" << endl;
+    cout << "|      (4) Quit Game                 | |  | |  | |                  | |         ||| |                       |" << endl;
+    cout << "|                                    | |  | |  | |                  | |         ()| |                       |" << endl;
+    cout << "|                                    | |  | |  | |                  | |           | |                       |" << endl;
+    cout << "|                                    | |__| |__| |                  | |           | |                       |" << endl;
+    cout << "|                                    |___________|                  |_|___________|_|                       |" << endl;
     cout << " ----------------------------------------------------------------------------------------------------------- " << endl;
 }
 
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) // Main for entire game
     string storyTxt = argv[1];
     // Game intro displayed
     introDisplay();
-    while(menuInput != "5") // While for main menu
+    while(menuInput != "4") // While for main menu
     {
 
         if(game_Menu_Input == "3")
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) // Main for entire game
 
                 if(g.loadGame(storyTxt)) // New game loaded succesfully
                 {
-                    
+
                     cout << "Game Loaded..." << endl;
                     cout << endl;
                     newGame();
@@ -262,15 +262,11 @@ int main(int argc, char* argv[]) // Main for entire game
             loadingNewGame = true;
             menuInput = "1";
         }
-        else if(menuInput == "3") // Will open options
-        {
-            options();
-        }
-        else if(menuInput == "4") // Shows credits
+        else if(menuInput == "3") // Shows credits
         {
             credits();
         }
-        else if(menuInput == "5") // Exits game and quits
+        else if(menuInput == "4") // Exits game and quits
         {
             endGameDisplay();
             // break;
