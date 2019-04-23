@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <time.h>
 #include <fstream>
 #include <cstdlib>
 #include <vector>
@@ -12,25 +13,7 @@
 
 using namespace std;
 
-// NOTES
-// cpp file intended to be for the bulk of the game as to remove it from the clutter of the driver DONTSTOP.cpp
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Graph::Graph()
-// {
-//     // No dynamic memory - so not needed
-// }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Graph::~Graph()
-// {
-//     // No dynamic memory - so not needed
-// }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
  // Function to add a newVertex to verticies with the given inputs
 void Game::addVertex(string identifier, string storyPart)
 {
@@ -43,7 +26,6 @@ void Game::addVertex(string identifier, string storyPart)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Adds an edge between the identifiers of the two given vertices
 void Game::addEdge(string identifier1, string identifier2)
 {
@@ -67,7 +49,6 @@ void Game::addEdge(string identifier1, string identifier2)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Displays each vertex in vertices and all of it edges following the --> seperated by ***
 void Game::displayEdges()
 {
@@ -87,7 +68,6 @@ void Game::displayEdges()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Will print all vertices in a Depth First Traversal order
 void Game::printDFT()
 {
@@ -101,7 +81,6 @@ void Game::printDFT()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Will set all verticies as unvisited
 void Game::setAllVerticesUnvisited()
 {
@@ -112,7 +91,6 @@ void Game::setAllVerticesUnvisited()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Allows you to search for a specific vertex in verticies && will return its pointer
 vertex *Game::findVertex(string identifier)
 {
@@ -129,7 +107,6 @@ vertex *Game::findVertex(string identifier)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Traveses vertices in a Depth First Traversal order
 void Game::DFT_traversal(vertex *v)
 {
@@ -148,7 +125,6 @@ void Game::DFT_traversal(vertex *v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Allows user to save their progress and resume under the load game option in main menu
 void Game::saveProgress()
 {
@@ -170,7 +146,6 @@ void Game::saveProgress()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // This function loads the default gaming, reading all vertices and their spcific information
 bool Game::loadGame(string txtFile)
 {
@@ -272,7 +247,6 @@ bool Game::loadGame(string txtFile)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Returns the first user postion of vertices[0]
 vertex *Game::startGame()
 {
@@ -280,7 +254,6 @@ vertex *Game::startGame()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Displays the chapter/story part/story section of the given vertex node
 void Game::showChapter(vertex *curr)
 {
@@ -288,7 +261,6 @@ void Game::showChapter(vertex *curr)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Function allowing user to make a choice based on the chapter of the most recent node
 // Each part displays options (1) through (n), the user inputs their choice and their position is changed to the chosen options node
 vertex *Game::makeChoice(int choice, vertex *v)
@@ -308,10 +280,10 @@ vertex *Game::makeChoice(int choice, vertex *v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Node 3B_1 asks the user a riddle, this is the function for checking user inputs and validating the answer
 bool Game::riddle()
 {
+    srand(time(0)); //makes the numbers actually random
     int riddleNum = rand()% 2 + 1; // 1-3 int
     string ans; //user input
     // 3 Different riddles to allow for more variation in each game playthrough
@@ -340,7 +312,6 @@ bool Game::riddle()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // A large function to check various conditions in each turn made by the user
 void Game::checkConditions(character *characterPosition)
 {
@@ -356,10 +327,12 @@ void Game::checkConditions(character *characterPosition)
     if(userPos->identifier == "2")
     {
         characterPosition->searchTimes++;
+        srand(time(0));
         int randGen = rand()%9 + 1;
         if(randGen > 0 && randGen < 4) // Finding hatch
         {
             cout << "You found a hidden hatch!" << endl;
+            cout << "It's a rusty metal slate with a small ring at its edge. As you open the hatch it creaks immensely loud and in fear of it attracting whatever is in the house, you descend down the ladder into the abyss. It's a rather short ladder down into a small dimly lit room. The only thing in the room is another ladder across from you leading up. So with no other option you begin to ascend." << endl;
             userPos = userPos->Edges[1].v;
             cout << endl;
         }
@@ -372,7 +345,8 @@ void Game::checkConditions(character *characterPosition)
         }
         else if(randGen >= 7 && randGen <= 10) // Finding Severed head
         {
-            int addFear = rand()% 20 + 10;
+            srand(time(0));
+            int addFear = rand()% 20 + 15;
             characterPosition->fear += addFear;
             cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
             userPos = userPos->Edges[0].v;
@@ -391,8 +365,9 @@ void Game::checkConditions(character *characterPosition)
     // 30% chance of dying in play room
     if(userPos->identifier == "1A_1")
     {
-        cout << "You enter the playroom, choosing the creepy dolls over total darkness. You pick  your way through the toys, careful not to disturb their rest. Suddenly out of the corner of your eye a rocking horse in the darkest corner starts moving back and forth, seemingly of its own accord. You freeze. Then a toy soldier floats into the air and is lifted around. You stand like a statue as one toy at a time is “played with” and the trail of paranormal activity is slowly coming towards you. You can barely see the outline of a figure with long arms and legs and a strange head. The toy closest to you, a doll wearing a torn dress, is hoisted into the air and spun around and then is dropped to the floor. You get the feeling you are next." << endl;
+        cout << "You enter the playroom, choosing the creepy dolls over total darkness. You pick  your way through the toys, careful not to disturb their rest. Suddenly out of the corner of your eye a rocking horse in the darkest corner starts moving back and forth, seemingly of its own accord. You freeze. Then a toy soldier floats into the air and is lifted around. You stand like a statue as one toy at a time is 'played with' and the trail of paranormal activity is slowly coming towards you. You can barely see the outline of a figure with long arms and legs and a strange head. The toy closest to you, a doll wearing a torn dress, is hoisted into the air and spun around and then is dropped to the floor. You get the feeling you are next." << endl;
         //////////////////////////////////////////////////
+        srand(time(0));
         int randGen = rand()%9 + 1;
         if(randGen > 0 && randGen < 4)
         {
@@ -401,7 +376,7 @@ void Game::checkConditions(character *characterPosition)
         }
         else
         {
-            cout << "You wait in silence for the entity to “play” with you, motionless for at least five minutes, but nothing happens. You get the feeling you need to keep moving so after mustering your courage you start sneaking towards the other side of the room where a ladder leads up to darkness. Successfully avoiding making too much noise you grasp the ladder and begin to climb out of the room." << endl;
+            cout << "You wait in silence for the entity to 'play' with you, motionless for at least five minutes, but nothing happens. You get the feeling you need to keep moving so after mustering your courage you start sneaking towards the other side of the room where a ladder leads up to darkness. Successfully avoiding making too much noise you grasp the ladder and begin to climb out of the room." << endl;
             userPos = userPos->Edges[0].v;
             cout << endl;
         }
@@ -428,7 +403,8 @@ void Game::checkConditions(character *characterPosition)
     userPos->identifier == "1C_1" || userPos->identifier == "1C_2" || userPos->identifier == "3B_2" || userPos->identifier == "3B_12_2"
     || userPos->identifier == "1A_11" || userPos->identifier == "3B_12_1")
     {
-        int addFear = rand()% 20 + 10;
+        srand(time(0));
+        int addFear = rand()% 20 + 15;
         characterPosition->fear += addFear;
     }
     // If user has too much fear, they die
@@ -481,7 +457,6 @@ void Game::checkConditions(character *characterPosition)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Generates a new character at start of new game
 character *Game::characterStart()
 {
@@ -496,7 +471,6 @@ character *Game::characterStart()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Loads a previous character with given inputs when loading a previous game
 character *Game::characterReboot(int search, int fear, bool key, bool girl, bool pot)
 {
