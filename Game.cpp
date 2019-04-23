@@ -7,6 +7,7 @@
 #include <list>
 #include <queue>
 #include <sstream>
+#include <time.h>
 
 #include "Game.hpp"
 
