@@ -318,7 +318,7 @@ void Game::checkConditions(character *characterPosition)
     // Keeps track of whether riddle answer was correct
     int riddleCorrect = false;
     // If user searcehs to many times, game is over
-    if(characterPosition->searchTimes >= 2) //Too many searches
+    if(characterPosition->searchTimes >= 3) //Too many searches
     {
         cout << "You peer around again, desperately hoping to find something that help you get out safely. You are so busy studying the contents of the boxes you barely notice the shadow of the figure until its fingers close over your neck and crush. -See you in another life-" << endl;
         isGameOver = true;
@@ -445,12 +445,19 @@ void Game::checkConditions(character *characterPosition)
     // At node 1C_21_1 the user must have one of two things, either the girl or less than 50% fear
     if(userPos->identifier == "1C_21_1")
     {
-        if(characterPosition->girlFound == true || characterPosition->fear < 51)
+        if(characterPosition->girlFound == true)
         {
+            cout << "You run up and begin to pull with all of your might. Your desperation to escape gives you extra strength and one by one the nails come out of the wall and the boards slide off. The girl is heaving just as hard, the determination to live giving her an adrenaline boost to almost superhuman strength. Both pairs of  hands wrench the last board off, and you toss the plank behind you. As you watch it slide into the kitchen a disgusting hand grabs hold of the wall and the monster pulls itself into the room. You don’t even look back at it, immediately pushing the girl through the gap you’ve made in the window. You hear thudding as it sprints towards you and then a tortured scream of desperation as it senses its prey escaping. Tensing your legs, you vault through the window. Just as you think you’re free you feel a strong grasp on your left foot. Your momentum is abruptly stopped and your body slams into the side of the house. You feel a crunch and a snap as your right arm takes the impact and breaks. Teeth gritting in a fierce snarl you wriggle and pull and manage to get your foot out of its grip and fall to the ground. Not stopping to think about your arm, you get up and sprint to the gate. The girl had paused for you but seeing you are okay she turns and sprints away as well. -You’ve escaped- " << endl;
+            isGameWon = true;
+        }
+        else if(characterPosition->fear < 51)
+        {
+            cout << "You run up and begin to pull with all of your might on the first board. Your desperation to escape gives you superhuman strength and one by one the nails come out of the wall and the boards slide off. Your hands wrench the last board off, and you toss the plank behind you. As you watch it slide into the kitchen a disgusting hand grabs hold of the wall and the monster pulls itself into the room. You don’t even look back at it, and immediately start to climb through the window. You hear thudding as it sprints towards you and then a tortured scream of desperation as it senses its prey escaping. Tensing your legs, you vault through the window. Just as you think you’re free you feel a strong grasp on your left foot. Your momentum is abruptly stopped and your body slams into the side of the house. You feel a crunch and a snap as your right arm takes the impact and breaks. Teeth gritting in a fierce snarl you wriggle and pull and manage to get your foot out of its grip and fall to the ground. Not stopping to think about your arm you get up and sprint to the gate. -You’ve escaped-" << endl;
             isGameWon = true;
         }
         else
         {
+            cout << "You run up and begin to pull on the first board. You realize you can barely grasp the plank from the fear swirling through your being. Arms quivering with both fear and exertion you slowly pull the boards off. You have to work faster! One by one you slide them out of the wall and they clatter to the floor. The noise doesn’t matter, because you know the monster knows where you are at this point. You can make it! There only two planks between you and freedom! As the second to last come out of the wall you feel the hairs on the back of your neck stand up. You try to pull furiously, but your fingers slip from how scared you are you fall on your back. You scream like a cornered animal and jump back up to pull the board but as you do you feel cold fingers clasp around your neck. You try to scream again, but the fingers clamp down like a vice and no sound comes out… -See you in another life-" << endl;
             isGameOver = true;
         }
     }
