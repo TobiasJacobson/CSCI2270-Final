@@ -67,6 +67,7 @@ class Game
     void checkConditions(character *characterPosition); // Checks all conditions
     character *characterStart(); // Creates a new character
     character *characterReboot(int, int, bool, bool, bool); // Loads a previous character
+    void showStats(character *characterPosition); //developer tool to show progress
 
     vertex *userPos; // Public variable to access the current user position
     vertex *savedProgress; // Public variable to allow loading of a new game
