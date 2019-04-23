@@ -79,6 +79,7 @@ void newGame() // Intro to a new game
     cout << "Follow the storyline and when given a choice, choose the option you'd like to explore" << endl;
     cout << "Each choice leads you down a different road -- each with a different end" << endl;
     cout << "-Play several times to get various endings-" << endl;
+    cout << "Press 9 to open in game menu." << endl;
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
     cout << "You wake with a start. Surveying your surroundings you see you are laying on the dirty floor of a small room lit only buy a torch. You are completely unaware of how you’d gotten here.  Raising your hand you feel a gash on your head and realize you have a thick, decaying broken noose bound tightly around your neck. You look around the room to figure out where you are. ";
