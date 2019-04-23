@@ -312,6 +312,7 @@ vertex *Game::makeChoice(int choice, vertex *v)
 // Node 3B_1 asks the user a riddle, this is the function for checking user inputs and validating the answer
 bool Game::riddle()
 {
+    srand(time(0));
     int riddleNum = rand()% 2 + 1; // 1-3 int
     string ans; //user input
     // 3 Different riddles to allow for more variation in each game playthrough
@@ -356,6 +357,7 @@ void Game::checkConditions(character *characterPosition)
     if(userPos->identifier == "2")
     {
         characterPosition->searchTimes++;
+        srand(time(0));
         int randGen = rand()%9 + 1;
         if(randGen > 0 && randGen < 4) // Finding hatch
         {
@@ -372,6 +374,7 @@ void Game::checkConditions(character *characterPosition)
         }
         else if(randGen >= 7 && randGen <= 10) // Finding Severed head
         {
+            srand(time(0));
             int addFear = rand()% 20 + 10;
             characterPosition->fear += addFear;
             cout << "You decide it’s best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
@@ -393,6 +396,7 @@ void Game::checkConditions(character *characterPosition)
     {
         cout << "You enter the playroom, choosing the creepy dolls over total darkness. You pick  your way through the toys, careful not to disturb their rest. Suddenly out of the corner of your eye a rocking horse in the darkest corner starts moving back and forth, seemingly of its own accord. You freeze. Then a toy soldier floats into the air and is lifted around. You stand like a statue as one toy at a time is “played with” and the trail of paranormal activity is slowly coming towards you. You can barely see the outline of a figure with long arms and legs and a strange head. The toy closest to you, a doll wearing a torn dress, is hoisted into the air and spun around and then is dropped to the floor. You get the feeling you are next." << endl;
         //////////////////////////////////////////////////
+        srand(time(0));
         int randGen = rand()%9 + 1;
         if(randGen > 0 && randGen < 4)
         {
@@ -428,6 +432,7 @@ void Game::checkConditions(character *characterPosition)
     userPos->identifier == "1C_1" || userPos->identifier == "1C_2" || userPos->identifier == "3B_2" || userPos->identifier == "3B_12_2"
     || userPos->identifier == "1A_11" || userPos->identifier == "3B_12_1")
     {
+        srand(time(0));
         int addFear = rand()% 20 + 10;
         characterPosition->fear += addFear;
     }
