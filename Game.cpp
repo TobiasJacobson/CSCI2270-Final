@@ -457,6 +457,18 @@ void Game::checkConditions(character *characterPosition)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// backend dev tool to quickly see stats for debugging
+void Game::showStats(character *characterPosition)
+{
+    cout << "Current Node: " << userPos->identifier << endl;
+    cout << "SearchTimes: " << characterPosition->searchTimes << endl;
+    cout << "Fear: " << characterPosition->fear << endl;
+    cout << "RoomGarageKey: " << characterPosition->roomGarageKey << endl;
+    cout << "GirlFound: " << characterPosition->girlFound << endl;
+    cout << "Potion: " << characterPosition->potion << endl << endl;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Generates a new character at start of new game
 character *Game::characterStart()
 {
