@@ -170,7 +170,7 @@ int main(int argc, char* argv[]) // Main for entire game
                 // LOADING GAME FROM TXT FILE
                 if(loadSavedGame) //if loading from a txt file
                 {
-                    cout << "Enter the .txt file that contains your info" << endl;
+                    cout << "Enter the .txt file that contains your info (include: .txt)" << endl;
                     string saveName;
                     getline(cin, saveName);
                     ifstream saveFile;
