@@ -81,6 +81,7 @@ void newGame() // Intro to a new game
     cout << "-Play several times to get various endings-" << endl;
     cout << endl;
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
+    cout << "You wake with a start. Surveying your surroundings you see you are laying on the dirty floor of a small room lit only buy a torch. You are completely unaware of how you’d gotten here.  Raising your hand you feel a gash on your head and realize you have a thick, decaying broken noose bound tightly around your neck. You look around the room to figure out where you are. ";
 }
 
 void inGameMenu() // In game menu to if 9 is pressed
