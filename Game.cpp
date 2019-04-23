@@ -329,28 +329,50 @@ void Game::checkConditions(character *characterPosition)
         characterPosition->searchTimes++;
         srand(time(0));
         int randGen = rand()%9 + 1;
-        if(randGen > 0 && randGen < 4) // Finding hatch
+        if(characterPosition->roomGarageKey == false)
         {
-            cout << "You found a hidden hatch!" << endl;
-            cout << "It's a rusty metal slate with a small ring at its edge. As you open the hatch it creaks immensely loud and in fear of it attracting whatever is in the house, you descend down the ladder into the abyss. It's a rather short ladder down into a small dimly lit room. The only thing in the room is another ladder across from you leading up. So with no other option you begin to ascend." << endl;
-            userPos = userPos->Edges[1].v;
-            cout << endl;
+            if(randGen > 0 && randGen < 4) // Finding hatch
+            {
+                cout << "You found a hidden hatch!" << endl;
+                cout << "It's a rusty metal slate with a small ring at its edge. As you open the hatch it creaks immensely loud and in fear of it attracting whatever is in the house, you descend down the ladder into the abyss. It's a rather short ladder down into a small dimly lit room. The only thing in the room is another ladder across from you leading up. So with no other option you begin to ascend." << endl;
+                userPos = userPos->Edges[1].v;
+                cout << endl;
+            }
+            else if(randGen > 3 && randGen < 7) // Finding Garage Key
+            {
+                cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. On the shelves behind you are see some dusty plates and mugs which look like they haven't been moved in years. Higher up you notice a small ragged sack tucked into the corner. You pull it down and begin loosening the knot on it, but to your surprise the knot breaks as you pick at it. Peering into the bag, unable to see in the dim light, you hesitantly stick your hand in and pull out a rusty key. Hoping it could be useful you put the key in your back pocket. You found a key! The key has been added to your inventory. Continue exploring to find what the key opens." << endl;
+                characterPosition->roomGarageKey = true;
+                userPos = userPos->Edges[0].v;
+                cout << endl;
+            }
+            else if(randGen >= 7 && randGen <= 10) // Finding Severed head
+            {
+                srand(time(0));
+                int addFear = rand()% 20 + 15;
+                characterPosition->fear += addFear;
+                cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
+                userPos = userPos->Edges[0].v;
+                cout << endl;
+            }
         }
-        else if(randGen > 3 && randGen < 7) // Finding Garage Key
+        else if(characterPosition->roomGarageKey == true)
         {
-            cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. On the shelves behind you are see some dusty plates and mugs which look like they haven't been moved in years. Higher up you notice a small ragged sack tucked into the corner. You pull it down and begin loosening the knot on it, but to your surprise the knot breaks as you pick at it. Peering into the bag, unable to see in the dim light, you hesitantly stick your hand in and pull out a rusty key. Hoping it could be useful you put the key in your back pocket. You found a key! The key has been added to your inventory. Continue exploring to find what the key opens." << endl;
-            characterPosition->roomGarageKey = true;
-            userPos = userPos->Edges[0].v;
-            cout << endl;
-        }
-        else if(randGen >= 7 && randGen <= 10) // Finding Severed head
-        {
-            srand(time(0));
-            int addFear = rand()% 20 + 15;
-            characterPosition->fear += addFear;
-            cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
-            userPos = userPos->Edges[0].v;
-            cout << endl;
+            if(randGen > 0 && randGen < 6) // Finding hatch
+            {
+                cout << "You found a hidden hatch!" << endl;
+                cout << "It's a rusty metal slate with a small ring at its edge. As you open the hatch it creaks immensely loud and in fear of it attracting whatever is in the house, you descend down the ladder into the abyss. It's a rather short ladder down into a small dimly lit room. The only thing in the room is another ladder across from you leading up. So with no other option you begin to ascend." << endl;
+                userPos = userPos->Edges[1].v;
+                cout << endl;
+            }
+            else if(randGen >= 6 && randGen <= 10) // Finding Severed head
+            {
+                srand(time(0));
+                int addFear = rand()% 20 + 15;
+                characterPosition->fear += addFear;
+                cout << "You decide it's best to prepare yourself and gear up in the event that who or whatever is in the house decides to come back. You begin to scavenge the room for anything that could be of use. As you look around the room you notice a small box in the dark corner. Walking over to the box you are hit with a sudden putrid smell of decay. Weary of what it may contain, you decide to bring it the light in the center of the room. Yet as you pick it up, grasping the underside, your hands are suddenly covered in a warm, thick substance. As you lift it higher you feel the bottom begin to sink down. You realize what you are holding is a human head. You scream and throw the box into the corner. You take deep breaths to calm yourself down but you feel permanently shaken." << endl;
+                userPos = userPos->Edges[0].v;
+                cout << endl;
+            }
         }
         else
         {
@@ -462,6 +484,7 @@ void Game::checkConditions(character *characterPosition)
         }
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // backend dev tool to quickly see stats for debugging
