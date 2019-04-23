@@ -11,8 +11,7 @@
 using namespace std;
 
 // TODO:
-// Store player position using currNode to txt file
-// Return after 3B_2 to 3B
+
 
 
 void introDisplay() // Main menu for start of game
@@ -91,17 +90,6 @@ void inGameMenu() // In game menu to if 9 is pressed
     cout << "(3) Quit to main menu" << endl;
 }
 
-
-void options() // Not sure what this will do but menu's always have options
-{
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-    cout << endl;
-    cout << "Will implement if time allows" << endl;
-    cout << endl;
-    cout << "------------------------------------------------------------------------------------------------------------" << endl;
-
-}
-
 void credits() // Credits to developers (Us)
 {
     cout << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -118,6 +106,7 @@ void credits() // Credits to developers (Us)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int main(int argc, char* argv[]) // Main for entire game
 {
     // Struct declaration
@@ -139,11 +128,13 @@ int main(int argc, char* argv[]) // Main for entire game
     {
         if(g.isGameOver)
         {
+            g.showChapter(g.userPos);
             gameOverOutro();
             break;
         }
         if(g.isGameWon)
         {
+            g.showChapter(g.userPos);
             gameWonOutro();
             break;
         }
@@ -169,15 +160,13 @@ int main(int argc, char* argv[]) // Main for entire game
         // START GAME
         if(menuInput == "1") // Option 1 to start a new game
         {
-
             if(g.loadGame(storyTxt)) // New game loaded succesfully
             {
-
                 cout << "Game Loaded..." << endl;
                 cout << endl;
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // LOADING GAME FROM TXT FILE
-                if(loadSavedGame)
+                if(loadSavedGame) //if loading from a txt file
                 {
                     cout << "Enter the .txt file that contains your info" << endl;
                     string saveName;
@@ -195,7 +184,7 @@ int main(int argc, char* argv[]) // Main for entire game
                     bool pot;
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     // Runs until reaches last file line when no next line to get
-                    while(getline(saveFile, textLine))
+                    while(getline(saveFile, textLine)) // Runs until reaches last file line when no next line to get
                     {
                         userPosition = textLine;
                         cout << "User Position: " << userPosition << endl;
@@ -203,11 +192,11 @@ int main(int argc, char* argv[]) // Main for entire game
                         getline(saveFile, iden);
                         searchNum = stoi(iden);
                         cout << "Times Searched: " << iden << endl;
-                        ////////////
+                        ///////////
                         getline(saveFile, iden);
                         fear = stoi(iden);
                         cout << "Fear: " << iden << endl;
-                        ////////////
+                        //////////
                         getline(saveFile, iden);
                         if(iden == "0")
                         {
@@ -218,7 +207,7 @@ int main(int argc, char* argv[]) // Main for entire game
                             garage = true;
                         }
                         cout << "GarageKey: " << garage << endl;
-                        ////////////
+                        ////////
                         getline(saveFile, iden);
                         if(iden == "0")
                         {
@@ -242,13 +231,13 @@ int main(int argc, char* argv[]) // Main for entire game
                         cout << "Potion: " << pot << endl;
                     }
 
-                    cout << "Character loaded succesfully\n\n";
+                    cout << "Character loaded succesfully\n" << endl;
                     g.player = g.characterReboot(searchNum, fear, garage, girl, pot);
                     g.userPos = g.findVertex(userPosition);
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // NEW GAME
-                else
+                else //If brand new game
                 {
                     g.player = g.characterStart();
                     g.userPos = g.startGame();
@@ -256,14 +245,38 @@ int main(int argc, char* argv[]) // Main for entire game
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // ACTUALLY RUNS THROUGH THE GAME
-                while(game_Menu_Input != "3")
+                while(game_Menu_Input != "3") // While for in game inputs
                 {
-                    // Taking user input after chapter
-                    g.showChapter(g.userPos); // Shows chapter of current node
-                    getline(cin, gameInput); // Taking user input based on chapter end
+                    if(g.userPos->identifier == "1C")
+                    {
+                        if(g.player->roomGarageKey)
+                        {
+                            cout << "You descend the staircase hoping to find a way out as quickly as possible. The lower floor is just as dark with the only source of light being the moon. In the corner you see the vague outline of a door with a large padlock that could be the garage(1). Also you see an archway leading to what could be the family room(2). Most enticing of all is the front door which leads straight to the front yard(3)." << endl;
+                            getline(cin, gameInput); // Taking user input based on chapter end
+                        }
+                        else
+                        {
+                            cout << "You descend the staircase hoping to find a way out as quickly as possible. The lower floor is just as dark with the only source of light being the moon. In the corner you see the vague outline of a door with a large padlock that could be the garage but you have no key so you cannot enter. Also you see an archway leading to what could be the family room(2). Most enticing of all is the front door which leads straight to the front yard(3)." << endl;
+                            getline(cin, gameInput); // Taking user input based on chapter end
+                            if(gameInput == "1")
+                            {
+                                gameInput = "5";
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Taking user input after chapter
+                        g.showChapter(g.userPos); // Shows chapter of current node
+                        getline(cin, gameInput); // Taking user input based on chapter end
+                    }
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     // OPENS IN GAME MENU
-                    if(gameInput == "9")
+                    if(gameInput == "9") // Opens in game menu if entered while in game
                     {
                         inGameMenu(); // Display in game menu
                         getline(cin, game_Menu_Input); // taking user input
@@ -314,34 +327,25 @@ int main(int argc, char* argv[]) // Main for entire game
                 break;
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // LOAD A PREVIOUS GAME
-        else if(menuInput == "2")
+        else if(menuInput == "2") // Will load previous save
         {
 
             loadSavedGame = true;
             menuInput = "1";
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // SHOW CREDITS
-        else if(menuInput == "3")
+        else if(menuInput == "3") // Shows credits
         {
             credits();
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-         // EXIT GAME AND QUIT
-        else if(menuInput == "4")
+        else if(menuInput == "4") // Exits game and quits
         {
             endGameDisplay();
             // break;
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // IF AN INVALID INPUT IS ENTERED
         else
         {
-            cout << "INVALID INPUT" << endl;
+            cout << "INVALID INPUT" << endl; // If no valid option
         }
     }
 
 }
-
