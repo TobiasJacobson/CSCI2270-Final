@@ -292,6 +292,10 @@ int main(int argc, char* argv[]) // Main for entire game
                         {
                             break; // Quits to main manu
                         }
+                        else if(game_Menu_Input == "+")
+                        {
+                            g.showStats(g.player);
+                        }
                     }
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     // If not in game menu, takes user input and goes to chosen node
