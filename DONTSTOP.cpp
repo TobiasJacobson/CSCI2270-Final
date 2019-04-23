@@ -128,11 +128,13 @@ int main(int argc, char* argv[]) // Main for entire game
     {
         if(g.isGameOver)
         {
+            g.showChapter(g.userPos);
             gameOverOutro();
             break;
         }
         if(g.isGameWon)
         {
+            g.showChapter(g.userPos);
             gameWonOutro();
             break;
         }

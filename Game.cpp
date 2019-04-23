@@ -454,7 +454,6 @@ void Game::checkConditions(character *characterPosition)
     userPos->identifier == "1C_3" || userPos->identifier == "1C_11_1" || userPos->identifier == "1C_21_2" || userPos->identifier == "3A" ||
     userPos->identifier == "3B_11" || userPos->identifier == "3B_12_21")
     {
-        cout << "In the spur of the moment you made a decision. A decision you thought would keep you alive. Oh how wrong you were because before you know it you everything goes dark and the last thing see you are the creature's glowing red eyes." << endl;
         isGameOver = true;
     }
     // User must be returned to node (3) if they are at (3B_2)
